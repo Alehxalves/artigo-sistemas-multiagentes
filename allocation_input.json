@@ -1,0 +1,39 @@
+{
+  "developers": [
+    "Alice",
+    "Bob",
+    "Charlie",
+    "Diana"
+  ],
+  "components": [
+    "Backend API Gateway",
+    "Frontend Dashboard",
+    "Serviço de Autenticação",
+    "Módulo de Relatórios"
+  ],
+  "skills": {
+    "Alice": "Python, Django, SQL, AWS",
+    "Bob": "JavaScript, React, Node.js",
+    "Charlie": "Java, Spring Boot, Kubernetes",
+    "Diana": "Python, ML, TensorFlow"
+  },
+  "preferences": {
+    "Alice": "Desafios de backend, aprender Go",
+    "Bob": "UX, performance web",
+    "Charlie": "DevOps, escalabilidade",
+    "Diana": "NLP, modelos generativos"
+  },
+  "truck_factors": {
+    "Backend API Gateway": 1.5,
+    "Frontend Dashboard": 3.0,
+    "Serviço de Autenticação": 2.0,
+    "Módulo de Relatórios": 4.0
+  },
+  "tasks_data": {
+    "TASK_001": "Implementar endpoint de autenticação.",
+    "TASK_002": "Desenvolver componente de dashboard.",
+    "TASK_003": "Otimizar consultas SQL.",
+    "TASK_004": "Projetar nova API REST.",
+    "TASK_005": "Prototipar modelo de ML."
+  }
+}

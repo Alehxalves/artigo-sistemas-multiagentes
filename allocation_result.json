@@ -1,0 +1,27 @@
+[
+  {
+    "taskId": "TASK_001",
+    "assignee": "Alice",
+    "justification": "Alice has skills in Python and Django which can be useful in implementing the authentication endpoint, with Truck Factor of 2."
+  },
+  {
+    "taskId": "TASK_002",
+    "assignee": "Bob",
+    "justification": "Bob's skills in JavaScript, React, and CSS make him well-suited for developing a frontend dashboard, which has a Truck Factor of 3."
+  },
+  {
+    "taskId": "TASK_003",
+    "assignee": "Alice",
+    "justification": "Alice possesses SQL skills and can optimize queries with a Truck Factor of 1.5."
+  },
+  {
+    "taskId": "TASK_004",
+    "assignee": "Alice",
+    "justification": "Alice can design new API REST, as she has the required skills. With a Truck Factor of 2."
+  },
+  {
+    "taskId": "TASK_005",
+    "assignee": "Diana",
+    "justification": "Diana's expertise in Python, ML, TensorFlow, and PyTorch makes her the best fit for prototyping the ML model, with a Truck Factor of 4."
+  }
+]
