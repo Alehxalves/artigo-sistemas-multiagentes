@@ -1,4 +1,5 @@
 {
+  "project_goal": "Desenvolver um novo módulo de e-commerce para a plataforma existente, incluindo um sistema de carrinho de compras, integração de pagamentos e uma interface de administração de produtos.",
   "developers": [
     "Alice",
     "Bob",
@@ -9,31 +10,28 @@
     "Backend API Gateway",
     "Frontend Dashboard",
     "Serviço de Autenticação",
-    "Módulo de Relatórios"
+    "Módulo de Relatórios",
+    "Banco de Dados",
+    "Sistema de Pagamentos"
   ],
   "skills": {
-    "Alice": "Python, Django, SQL, AWS",
-    "Bob": "JavaScript, React, Node.js",
-    "Charlie": "Java, Spring Boot, Kubernetes",
-    "Diana": "Python, ML, TensorFlow"
+    "Alice": "Python, Django, SQL, AWS, REST APIs",
+    "Bob": "JavaScript, React, Node.js, UX/UI",
+    "Charlie": "Java, Spring Boot, Kubernetes, DevOps, CI/CD",
+    "Diana": "Python, ML, TensorFlow, Análise de Dados"
   },
   "preferences": {
-    "Alice": "Desafios de backend, aprender Go",
-    "Bob": "UX, performance web",
-    "Charlie": "DevOps, escalabilidade",
-    "Diana": "NLP, modelos generativos"
+    "Alice": "Desafios de backend, arquitetura de sistemas, aprender Go",
+    "Bob": "Foco em experiência do usuário, performance web, componentes reutilizáveis",
+    "Charlie": "Infraestrutura como código, escalabilidade, segurança",
+    "Diana": "Processamento de linguagem natural, modelos de recomendação, visualização de dados"
   },
   "truck_factors": {
     "Backend API Gateway": 1.5,
     "Frontend Dashboard": 3.0,
     "Serviço de Autenticação": 2.0,
-    "Módulo de Relatórios": 4.0
-  },
-  "tasks_data": {
-    "TASK_001": "Implementar endpoint de autenticação.",
-    "TASK_002": "Desenvolver componente de dashboard.",
-    "TASK_003": "Otimizar consultas SQL.",
-    "TASK_004": "Projetar nova API REST.",
-    "TASK_005": "Prototipar modelo de ML."
+    "Módulo de Relatórios": 4.0,
+    "Banco de Dados": 2.5,
+    "Sistema de Pagamentos": 1.0
   }
 }

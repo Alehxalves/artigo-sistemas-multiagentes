@@ -2,26 +2,86 @@
   {
     "taskId": "TASK_001",
     "assignee": "Alice",
-    "justification": "Alice has skills in Python and Django which can be useful in implementing the authentication endpoint, with Truck Factor of 2."
+    "justification": "Alice tem experiência em definir escopo e requisitos, e sua preferência por arquitetura de sistemas se alinha bem com a necessidade de detalhar funcionalidades e integrações do módulo de e-commerce."
   },
   {
     "taskId": "TASK_002",
     "assignee": "Bob",
-    "justification": "Bob's skills in JavaScript, React, and CSS make him well-suited for developing a frontend dashboard, which has a Truck Factor of 3."
+    "justification": "Bob possui as habilidades de JavaScript e React, que são essenciais para criar protótipos de interface (UI) e experiência do usuário (UX) para o carrinho de compras e páginas de produtos."
   },
   {
     "taskId": "TASK_003",
     "assignee": "Alice",
-    "justification": "Alice possesses SQL skills and can optimize queries with a Truck Factor of 1.5."
+    "justification": "Alice tem experiência em SQL e pode projetar a arquitetura do banco de dados para o e-commerce, considerando informações de produtos, clientes, pedidos e carrinho de compras."
   },
   {
     "taskId": "TASK_004",
     "assignee": "Alice",
-    "justification": "Alice can design new API REST, as she has the required skills. With a Truck Factor of 2."
+    "justification": "Alice, com seus conhecimentos em Django e REST APIs, pode desenvolver a interface de administração de produtos, um projeto que requer habilidades de backend."
   },
   {
     "taskId": "TASK_005",
+    "assignee": "Bob",
+    "justification": "Bob pode implementar a exibição de produtos (listagem, detalhes, busca e filtros) usando suas habilidades em JavaScript e React para a interface front-end."
+  },
+  {
+    "taskId": "TASK_006",
+    "assignee": "Bob",
+    "justification": "Bob pode implementar o sistema de carrinho de compras (adicionar, remover itens, atualizar quantidades) usando suas habilidades front-end."
+  },
+  {
+    "taskId": "TASK_007",
+    "assignee": "Bob",
+    "justification": "Bob pode implementar a lógica de checkout (coleta de informações de entrega e cobrança, resumo do pedido) usando suas habilidades front-end."
+  },
+  {
+    "taskId": "TASK_008",
+    "assignee": "Alice",
+    "justification": "Alice pode integrar com provedores de pagamento (ex: PayPal, Stripe, etc.) usando suas habilidades em Python e REST APIs."
+  },
+  {
+    "taskId": "TASK_009",
+    "assignee": "Alice",
+    "justification": "Alice pode implementar a geração de confirmação de pedido e notificações (e-mails, etc.) usando suas habilidades em backend."
+  },
+  {
+    "taskId": "TASK_010",
+    "assignee": "Alice",
+    "justification": "Alice pode desenvolver a funcionalidade de gerenciamento de pedidos na interface de administração, que requer habilidades de backend."
+  },
+  {
+    "taskId": "TASK_011",
+    "assignee": "Charlie",
+    "justification": "Charlie, com seus conhecimentos em DevOps e segurança, pode implementar medidas de segurança para proteger dados de clientes e transações financeiras."
+  },
+  {
+    "taskId": "TASK_012",
     "assignee": "Diana",
-    "justification": "Diana's expertise in Python, ML, TensorFlow, and PyTorch makes her the best fit for prototyping the ML model, with a Truck Factor of 4."
+    "justification": "Diana, com sua experiência em análise de dados, pode auxiliar nos testes do módulo de e-commerce (testes unitários, testes de integração, testes de aceitação do usuário) e garantir a qualidade."
+  },
+  {
+    "taskId": "TASK_013",
+    "assignee": "Charlie",
+    "justification": "Charlie, com suas habilidades em DevOps e conhecimento de infraestrutura, pode integrar o módulo de e-commerce com a plataforma existente."
+  },
+  {
+    "taskId": "TASK_014",
+    "assignee": "Charlie",
+    "justification": "Charlie pode realizar testes de desempenho e otimizar o módulo para alta performance devido ao seu conhecimento em DevOps."
+  },
+  {
+    "taskId": "TASK_015",
+    "assignee": "Alice",
+    "justification": "Alice pode documentar o código e a arquitetura do sistema."
+  },
+  {
+    "taskId": "TASK_016",
+    "assignee": "Charlie",
+    "justification": "Charlie pode implantar o módulo de e-commerce no ambiente de produção devido ao seu conhecimento em DevOps."
+  },
+  {
+    "taskId": "TASK_017",
+    "assignee": "Charlie",
+    "justification": "Charlie, com seus conhecimentos em DevOps e experiência em infraestrutura, pode fornecer suporte e manutenção contínuos ao módulo."
   }
 ]

@@ -1,20 +1,23 @@
-import os
 import json
-from dotenv import load_dotenv
-from crewai import Agent, Task, Crew, Process, LLM
+import os
+
+from crewai import LLM, Agent, Crew, Process, Task
 from crewai.tools import tool
+from dotenv import load_dotenv
+
+from project_planner import create_planner_agent
 
 # Carrega variáveis de ambiente (.env deve conter OPENAI_API_KEY ou GOOGLE_API_KEY)
 load_dotenv()
 API_KEY = os.getenv("OPENAI_API_KEY") or os.getenv("GOOGLE_API_KEY")
 
 def create_crew(
+    project_goal: str,
     developers: list,
     components: list,
     skills: dict,
     preferences: dict,
-    truck_factors: dict,
-    tasks_data: dict
+    truck_factors: dict
 ) -> dict:
     """
     Cria o Crew com base nos parâmetros, executa o pipeline,
@@ -41,10 +44,10 @@ def create_crew(
         """Retorna o Truck Factor de um componente."""
         return truck_factors.get(component, 1.0)
 
-    @tool
-    def get_task_details(task_id: str) -> str:
-        """Retorna a descrição de uma tarefa."""
-        return tasks_data.get(task_id, "Tarefa não encontrada.")
+    # A ferramenta get_task_details não é mais necessária, pois o planejador gera as tarefas.
+
+    # Agentes
+    planner_agent = create_planner_agent(llm)
 
     dev_data_analyst = Agent(
         role='Analista de Dados de Desenvolvedores',
@@ -76,8 +79,15 @@ def create_crew(
         ),
         backstory='Gerente de projetos usando IA.',
         llm=llm,
-        tools=[get_task_details],
-        verbose=False, allow_delegation=True
+        tools=[],  # As tarefas agora vêm do contexto do planejador
+        verbose=False, allow_delegation=False # Alterado para False para evitar erros
+    )
+
+    # Tarefas
+    plan = Task(
+        description=f"Analisar e detalhar o seguinte objetivo: '{project_goal}'",
+        agent=planner_agent,
+        expected_output="Um dicionário JSON de tarefas, onde as chaves são IDs e os valores são as descrições."
     )
 
     collect = Task(
@@ -94,20 +104,21 @@ def create_crew(
 
     allocate = Task(
         description=(
-            "Com base nos perfis e Truck Factors, alocar cada tarefa "
-            f"das chaves {list(tasks_data.keys())}."
+            "Com base nos perfis, Truck Factors e na lista de tarefas gerada, "
+            "alocar cada tarefa de forma otimizada."
         ),
         agent=task_allocator,
-        context=[collect, analyze],
+        context=[collect, analyze, plan],
         expected_output="JSON estruturado de alocações."
     )
 
     crew = Crew(
-        agents=[dev_data_analyst, truck_factor_analyst, task_allocator],
-        tasks=[collect, analyze, allocate],
+        agents=[planner_agent, dev_data_analyst, truck_factor_analyst, task_allocator],
+        tasks=[plan, collect, analyze, allocate],
         process=Process.sequential,
         manager_llm=llm,
-        verbose=True
+        verbose=True,
+        max_rpm=15
     )
 
     result = crew.kickoff()
@@ -115,12 +126,12 @@ def create_crew(
     # Salva entrada
     with open('allocation_input.json', 'w', encoding='utf-8') as f:
         json.dump({
+            'project_goal': project_goal,
             'developers': developers,
             'components': components,
             'skills': skills,
             'preferences': preferences,
-            'truck_factors': truck_factors,
-            'tasks_data': tasks_data
+            'truck_factors': truck_factors
         }, f, ensure_ascii=False, indent=2)
 
     # --- Sanitiza fences Markdown ---
@@ -153,32 +164,34 @@ def create_crew(
 
 
 if __name__ == '__main__':
+    # Defina o objetivo do projeto de alto nível
+    project_goal = (
+        "Desenvolver um novo módulo de e-commerce para a plataforma existente, "
+        "incluindo um sistema de carrinho de compras, integração de pagamentos e "
+        "uma interface de administração de produtos."
+    )
+
     developers = ['Alice', 'Bob', 'Charlie', 'Diana']
-    components = ['Backend API Gateway', 'Frontend Dashboard', 'Serviço de Autenticação', 'Módulo de Relatórios']
+    components = ['Backend API Gateway', 'Frontend Dashboard', 'Serviço de Autenticação', 'Módulo de Relatórios', 'Banco de Dados', 'Sistema de Pagamentos']
     skills = {
-        'Alice': 'Python, Django, SQL, AWS',
-        'Bob': 'JavaScript, React, Node.js',
-        'Charlie': 'Java, Spring Boot, Kubernetes',
-        'Diana': 'Python, ML, TensorFlow'
+        'Alice': 'Python, Django, SQL, AWS, REST APIs',
+        'Bob': 'JavaScript, React, Node.js, UX/UI',
+        'Charlie': 'Java, Spring Boot, Kubernetes, DevOps, CI/CD',
+        'Diana': 'Python, ML, TensorFlow, Análise de Dados'
     }
     preferences = {
-        'Alice': 'Desafios de backend, aprender Go',
-        'Bob': 'UX, performance web',
-        'Charlie': 'DevOps, escalabilidade',
-        'Diana': 'NLP, modelos generativos'
+        'Alice': 'Desafios de backend, arquitetura de sistemas, aprender Go',
+        'Bob': 'Foco em experiência do usuário, performance web, componentes reutilizáveis',
+        'Charlie': 'Infraestrutura como código, escalabilidade, segurança',
+        'Diana': 'Processamento de linguagem natural, modelos de recomendação, visualização de dados'
     }
     truck_factors = {
         'Backend API Gateway': 1.5,
         'Frontend Dashboard': 3.0,
         'Serviço de Autenticação': 2.0,
-        'Módulo de Relatórios': 4.0
-    }
-    tasks_data = {
-        'TASK_001': 'Implementar endpoint de autenticação.',
-        'TASK_002': 'Desenvolver componente de dashboard.',
-        'TASK_003': 'Otimizar consultas SQL.',
-        'TASK_004': 'Projetar nova API REST.',
-        'TASK_005': 'Prototipar modelo de ML.'
+        'Módulo de Relatórios': 4.0,
+        'Banco de Dados': 2.5,
+        'Sistema de Pagamentos': 1.0
     }
 
-    create_crew(developers, components, skills, preferences, truck_factors, tasks_data)
+    create_crew(project_goal, developers, components, skills, preferences, truck_factors)
