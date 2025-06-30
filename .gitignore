@@ -1,2 +1,23 @@
-*.env
-*.json
+# Arquivos de ambiente - Contêm segredos!
+.env
+
+# Arquivos JSON gerados em tempo de execução
+allocation_input.json
+allocation_result.json
+simulation_results.json
+cenario_simulacao_llm.json
+
+# Cache e arquivos compilados do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Pastas de ambiente virtual
+env/
+venv/
+*.venv
+
+# Arquivos de configuração de IDEs
+.vscode/
+.idea/
