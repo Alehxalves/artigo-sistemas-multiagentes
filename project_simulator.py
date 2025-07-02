@@ -12,23 +12,59 @@ API_KEY = os.getenv("OPENAI_API_KEY") or os.getenv("GOOGLE_API_KEY")
 
 # --- Constante para o limite de RPM ---
 RPM_LIMIT = 14
+# --- Modelos LLM padrões para a simulação ---
+LLM_MODEL_DEFAULT = 'gemini/gemini-2.0-flash-lite'
+LLM_MODEL_SIMULATION = 'gemini/gemini-2.5-pro'
 
 
 def _sanitize_json_output(raw_output: str) -> str:
-    """Limpa a saída de texto do LLM para extrair um bloco JSON."""
-    json_start_index = raw_output.find('{')
-    if json_start_index == -1:
-        json_start_index = raw_output.find('[')
-        if json_start_index == -1:
-            return ""
+    """
+    Limpa a saída de texto do LLM para extrair um bloco JSON.
+    Tenta encontrar o início de um objeto '{' ou de uma lista '['.
+    Se encontrar múltiplos objetos JSON separados por vírgula, mas sem
+    os colchetes da lista, os adiciona.
+    """
+    # Remove cercas de código e espaços em branco extras
+    clean_output = raw_output.strip()
+    if clean_output.startswith("```json"):
+        clean_output = clean_output[7:]
+    if clean_output.endswith("```"):
+        clean_output = clean_output[:-3]
+    clean_output = clean_output.strip()
 
-    json_end_index = raw_output.rfind('}')
-    if json_end_index == -1:
-        json_end_index = raw_output.rfind(']')
-        if json_end_index == -1:
-            return ""
+    # Encontra o primeiro caractere JSON relevante
+    json_start_index = -1
+    first_brace = clean_output.find('{')
+    first_bracket = clean_output.find('[')
 
-    return raw_output[json_start_index:json_end_index + 1]
+    if first_brace != -1 and (first_bracket == -1 or first_brace < first_bracket):
+        json_start_index = first_brace
+    elif first_bracket != -1:
+        json_start_index = first_bracket
+    else:
+        return "" # Nenhum JSON encontrado
+
+    # Encontra o último caractere JSON relevante
+    json_end_index = -1
+    last_brace = clean_output.rfind('}')
+    last_bracket = clean_output.rfind(']')
+
+    if last_brace != -1 and (last_bracket == -1 or last_brace > last_bracket):
+        json_end_index = last_brace
+    elif last_bracket != -1:
+        json_end_index = last_bracket
+    else:
+        return "" # Fim do JSON não encontrado
+
+    # Extrai o conteúdo JSON
+    json_content = clean_output[json_start_index:json_end_index + 1]
+
+    # Verifica se é uma lista de objetos que não está entre colchetes
+    # Ex: { ... }, { ... }
+    if json_content.startswith('{') and json_content.endswith('}') and '},{' in json_content:
+        return f'[{json_content}]'
+
+    return json_content
 
 
 def run_simulation(scenario_path: str):
@@ -40,18 +76,27 @@ def run_simulation(scenario_path: str):
         cenario = json.load(f)
     print(f"Cenário '{scenario_path}' carregado.")
 
-    llm = LLM(
-        model='gemini/gemini-2.0-flash-lite',
+    # LLM padrão para a maioria dos agentes
+    llm_default = LLM(
+        model=LLM_MODEL_DEFAULT,
         api_key=API_KEY,
         system_message="Você é um assistente especialista em gerenciamento de projetos ágeis.",
-        temperature=0.1
+        temperature=0
+    )
+
+    # LLM específico e mais poderoso para o agente de análise de impacto
+    llm_impact = LLM(
+        model=LLM_MODEL_SIMULATION,
+        api_key=API_KEY,
+        system_message="Você é um assistente especialista em análise quantitativa de impacto em projetos de software.",
+        temperature=0
     )
 
     sprint_planner_agent = Agent(
         role='Planejador de Sprints Ágil',
         goal="Analisar um backlog de tarefas e um número de sprints para criar um plano de trabalho balanceado.",
         backstory="Um Scrum Master experiente que sabe como balancear o trabalho ao longo das sprints.",
-        llm=llm, verbose=False
+        llm=llm_default, verbose=False
     )
 
     task_allocator_agent = Agent(
@@ -62,24 +107,59 @@ def run_simulation(scenario_path: str):
         ),
         backstory=(
             "Um gerente de projetos eficiente que rapidamente realoca e reestima tarefas quando a equipe muda, "
-            "focando em maximizar a produtividade e prever custos."
+            "focando em maximizar a produtividade e prever custos, considerando a especialidade de cada dev."
         ),
-        llm=llm, verbose=False
+        llm=llm_default, verbose=False
+    )
+
+    ramp_up_analyzer_agent = Agent(
+        role='Analista de Onboarding de Talentos Técnicos',
+        goal=(
+            "Estimar o tempo de adaptação (ramp-up) em dias para um novo desenvolvedor, "
+            "baseado em suas habilidades e no backlog de tarefas restante do projeto. "
+            "Retornar um JSON com a estimativa."
+        ),
+        backstory=(
+            "Um especialista em integração de equipes que entende a curva de aprendizado de novas tecnologias "
+            "e a complexidade de projetos de software, prevendo quanto tempo um novo membro levará para se tornar produtivo."
+        ),
+        llm=llm_impact, verbose=False
+    )
+
+    event_impact_analyzer_agent = Agent(
+        role='Analisador Quantitativo de Impacto de Eventos de Equipe',
+        goal=(
+            "Analisar o impacto da saída ou contratação de um desenvolvedor e quantificá-lo. "
+            "Estimar o impacto financeiro (custo adicional) e no cronograma (dias de atraso) com base no backlog restante, "
+            "truck factor e skills da equipe. O resultado deve ser um JSON."
+        ),
+        backstory=(
+            "Um analista de projetos data-driven que traduz mudanças na equipe em métricas de custo e prazo, "
+            "focando em fornecer dados para tomada de decisão."
+        ),
+        llm=llm_impact, verbose=False
     )
 
     summary_agent = Agent(
-        role='Gerente de Relatórios de Projeto',
+        role='Analista de Projetos Sênior Quantitativo',
         goal=(
-            "Consolidar os resultados de todas as sprints, analisando o impacto de eventos (saídas e contratações) "
-            "nos custos e prazos, e gerar um relatório final conciso em formato JSON."
+            "Consolidar os resultados de todas as sprints e análises de impacto de eventos para gerar um relatório final "
+            "quantitativo e qualitativo. O relatório deve calcular custos e prazos totais, analisar desvios, "
+            "e fornecer um resumo executivo e recomendações baseadas em dados. O formato final deve ser JSON."
         ),
-        backstory="Um PMO que transforma dados de execução de projeto em relatórios executivos claros e objetivos.",
-        llm=llm, verbose=False
+        backstory=(
+            "Um especialista em análise de dados de projetos (PMO) que transforma logs de simulação em insights acionáveis, "
+            "focando em métricas quantitativas como desvio de custo, impacto no cronograma e resiliência da equipe."
+        ),
+        llm=llm_impact, verbose=False
     )
 
     print("\n--- Fase 1: Planejando as Sprints com IA ---")
-    backlog_completo = cenario['projeto']['backlog_completo']
+    projeto = cenario['projeto']
+    backlog_completo = projeto['backlog_completo']
     total_sprints = cenario['config']['total_sprints_planejadas']
+    componentes = projeto['componentes']
+    truck_factors = projeto['truck_factors']
 
     planning_task = Task(
         description=(
@@ -100,25 +180,113 @@ def run_simulation(scenario_path: str):
     print("\n--- Fase 2: Iniciando a Simulação das Sprints ---")
     equipe_atual = cenario['equipe_inicial'].copy()
     resultados_simulacao = []
+    completed_task_ids = set()
 
     for sprint_info in cenario['plano_sprints']:
         sprint_id = sprint_info['sprint_id']
         print(f"\n>>> Processando Sprint {sprint_id}... <<<")
 
-        sprint_resultado = {'sprint_id': sprint_id, 'evento': None, 'alocacao': None, 'total_sprint_days': 0, 'total_sprint_cost': 0}
+        sprint_resultado = {'sprint_id': sprint_id, 'evento': None, 'analise_impacto_evento': None, 'alocacao': None, 'total_sprint_days': 0, 'total_sprint_cost': 0}
 
         evento = sprint_info.get('evento')
         if evento:
             sprint_resultado['evento'] = evento
+
+            remaining_task_ids = set(backlog_completo.keys()) - completed_task_ids
+            remaining_backlog = {task_id: backlog_completo[task_id] for task_id in remaining_task_ids}
+            total_dias_restantes = sum(task['estimated_days'] for task in remaining_backlog.values())
+
+            impact_analysis_desc = ""
             if evento['tipo'] == 'saida':
                 dev_saindo = evento['dev']
+                equipe_antes_saida = equipe_atual.copy()
                 if dev_saindo in equipe_atual:
                     del equipe_atual[dev_saindo]
                     print(f"[EVENTO] Saída: {dev_saindo} deixou a equipe. Motivo: {evento.get('motivo', 'N/A')}")
+                    impact_analysis_desc = (
+                        f"O desenvolvedor '{dev_saindo}' saiu da equipe. A equipe anterior era {list(equipe_antes_saida.keys())} e agora é {list(equipe_atual.keys())}. "
+                        f"O truck factor do projeto é: {json.dumps(truck_factors)}. "
+                        f"O backlog restante tem {len(remaining_backlog)} tarefas, somando {total_dias_restantes} dias estimados. "
+                        f"Analise o impacto quantitativo desta saída no projeto. Considere se o dev era um 'truck factor' para algum componente. "
+                        f"Estime a variação de custo e de prazo para o restante do projeto. "
+                        f"Uma variação positiva indica um aumento (impacto negativo), enquanto uma variação negativa indica uma redução (impacto positivo)."
+                    )
+
+
             elif evento['tipo'] == 'contratacao':
                 novo_dev = evento['dev']
                 equipe_atual[novo_dev] = evento['dev_details']
                 print(f"[EVENTO] Contratação: {novo_dev} se juntou à equipe.")
+
+                # --- Estimar o período de adaptação com LLM ---
+                print("Estimando período de adaptação do novo desenvolvedor...")
+                ramp_up_task_desc = (
+                    f"O novo desenvolvedor é '{novo_dev}' com as seguintes competências: {json.dumps(evento['dev_details'])}. "
+                    f"O backlog de tarefas restante do projeto é: {json.dumps(remaining_backlog, indent=2)}. "
+                    f"Com base na complexidade das tarefas restantes e nas habilidades do desenvolvedor, "
+                    f"estime quantos dias de adaptação (ramp-up) ele precisará para começar a contribuir efetivamente. "
+                    "Considere que um dev sênior em uma tecnologia familiar pode levar de 2 a 5 dias, enquanto um dev "
+                    "em um domínio desconhecido pode levar de 10 a 15 dias."
+                )
+                ramp_up_task = Task(
+                    description=ramp_up_task_desc,
+                    agent=ramp_up_analyzer_agent,
+                    expected_output='Um único bloco de código JSON com a chave "dias_adaptacao_estimados". Ex: {"dias_adaptacao_estimados": 5}'
+                )
+                ramp_up_crew = Crew(agents=[ramp_up_analyzer_agent], tasks=[ramp_up_task], process=Process.sequential,
+                                    max_rpm=RPM_LIMIT)
+                ramp_up_result_raw = ramp_up_crew.kickoff()
+                ramp_up_result_clean = _sanitize_json_output(str(ramp_up_result_raw))
+                periodo_adaptacao_dias = 5  # Valor padrão
+                try:
+                    ramp_up_json = json.loads(ramp_up_result_clean)
+                    periodo_adaptacao_dias = ramp_up_json.get('dias_adaptacao_estimados', 5)
+                    print(f"Período de adaptação estimado pela IA: {periodo_adaptacao_dias} dias.")
+                except json.JSONDecodeError:
+                    print(
+                        f"Erro ao decodificar JSON da estimativa de adaptação. Usando valor padrão de {periodo_adaptacao_dias} dias.")
+                custo_adaptacao = periodo_adaptacao_dias * evento['dev_details']['cost_per_day']
+                # --- Fim da estimativa de adaptação ---
+
+                impact_analysis_desc = (
+                    f"O desenvolvedor '{novo_dev}' ({json.dumps(evento['dev_details'])}) foi contratado. "
+                    f"Foi estimado um período de adaptação de {periodo_adaptacao_dias} dias, com um custo de integração de {custo_adaptacao}. "
+                    f"A nova equipe é {list(equipe_atual.keys())}. "
+                    f"O truck factor do projeto é: {json.dumps(truck_factors)}. "
+                    f"O backlog restante tem {len(remaining_backlog)} tarefas, somando {total_dias_restantes} dias estimados. "
+                    f"Analise o impacto quantitativo desta contratação no projeto, considerando o período de adaptação. "
+                    f"Estime a variação de custo e de prazo para o restante do projeto. "
+                    f"Uma variação negativa indica uma redução (impacto positivo), enquanto uma variação positiva indica um aumento (impacto negativo)."
+                )
+
+            if impact_analysis_desc:
+                impact_task = Task(
+                    description=impact_analysis_desc,
+                    agent=event_impact_analyzer_agent,
+                    expected_output="""
+                    Um único bloco de código JSON com a seguinte estrutura:
+                    {
+                      "impacto_custo_estimado": <valor_numerico>,
+                      "impacto_prazo_estimado_dias": <valor_numerico>,
+                      "risco_truck_factor_afetado": <booleano>,
+                      "analise_qualitativa": "<texto_explicativo>"
+                    }
+                    """
+                )
+                impact_crew = Crew(agents=[event_impact_analyzer_agent], tasks=[impact_task], process=Process.sequential, max_rpm=RPM_LIMIT)
+                impact_analysis_raw = impact_crew.kickoff()
+                impact_analysis_clean = _sanitize_json_output(str(impact_analysis_raw))
+                try:
+                    impact_analysis_json = json.loads(impact_analysis_clean)
+                    sprint_resultado['analise_impacto_evento'] = impact_analysis_json
+                    print(f"[ANÁLISE DE IMPACTO] {json.dumps(impact_analysis_json, ensure_ascii=False)}")
+                except json.JSONDecodeError:
+                    print(f"Erro ao decodificar JSON da análise de impacto. Saída bruta: {impact_analysis_clean}")
+                    sprint_resultado['analise_impacto_evento'] = {"erro": "Falha ao decodificar JSON", "output_bruto": impact_analysis_clean}
+
+                print("Aguardando 60 segundos para evitar limite de RPM...")
+                time.sleep(60)
+
 
         tarefas_da_sprint_ids = sprint_plan.get(str(sprint_id), [])
         if not tarefas_da_sprint_ids:
@@ -133,9 +301,12 @@ def run_simulation(scenario_path: str):
             allocation_task = Task(
                 description=(
                     f"Dada a equipe atual: {json.dumps(equipe_atual, indent=2)}, "
-                    f"e as tarefas para esta sprint: {json.dumps(tarefas_da_sprint_data, indent=2)}. "
-                    "Aloque cada tarefa a um desenvolvedor. Para cada alocação, reestime os 'dias' necessários "
-                    "com base na adequação do desenvolvedor e calcule o 'custo' (dias * cost_per_day). "
+                    f"as tarefas para esta sprint: {json.dumps(tarefas_da_sprint_data, indent=2)}, "
+                    f"os componentes do projeto: {json.dumps(componentes)}, "
+                    f"e o truck factor (desenvolvedores-chave) de cada componente: {json.dumps(truck_factors, indent=2)}. "
+                    "Aloque cada tarefa a um desenvolvedor. Considere que as tarefas podem estar relacionadas a um ou mais componentes. "
+                    "Priorize alocar tarefas para os desenvolvedores listados no 'truck_factor' do componente correspondente, se eles estiverem na equipe atual. "
+                    "Para cada alocação, reestime os 'dias' necessários com base na adequação do desenvolvedor e calcule o 'custo' (dias * cost_per_day). "
                     "Retorne um JSON com uma lista de objetos, cada um contendo 'task_id', 'assignee', 'estimated_days', e 'estimated_cost'."
                 ),
                 agent=task_allocator_agent,
@@ -155,8 +326,11 @@ def run_simulation(scenario_path: str):
                 sprint_resultado['alocacao'] = {"erro": "Falha ao decodificar JSON", "output_bruto": alocacao_clean}
 
         resultados_simulacao.append(sprint_resultado)
-        print("Aguardando 60 segundos para evitar limite de RPM...")
-        time.sleep(60)
+        completed_task_ids.update(tarefas_da_sprint_ids)
+
+        if sprint_id < len(cenario['plano_sprints']):
+            print("Aguardando 60 segundos para evitar limite de RPM...")
+            time.sleep(60)
 
     print("\n--- Fase 3: Gerando Relatório Final da Simulação ---")
     summary_task = Task(
@@ -165,7 +339,7 @@ def run_simulation(scenario_path: str):
             f"{json.dumps(resultados_simulacao, indent=2)}, "
             "gere uma análise final do projeto. A análise deve incluir: "
             "1. Um resumo executivo do desempenho do projeto. "
-            "2. O impacto dos eventos (saídas e contratações) nos custos e prazos totais. "
+            "2. O impacto dos eventos (saídas e contratações) nos custos e prazos totais, usando as análises de impacto quantitativas geradas. "
             "3. Uma avaliação da resiliência da equipe e como as estimativas mudaram. "
             "4. Recomendações para projetos futuros."
         ),

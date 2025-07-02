@@ -1,4 +1,3 @@
-# gerador_cenario_llm.py
 import json
 import os
 from dotenv import load_dotenv
@@ -11,7 +10,7 @@ API_KEY = os.getenv("OPENAI_API_KEY") or os.getenv("GOOGLE_API_KEY")
 def gerar_cenario_com_llm(
     total_sprints: int = 5,
     tarefas_por_sprint: int = 5,
-    llm_model: str = 'gemini/gemini-2.0-flash-lite'
+    llm_model: str = 'gemini/gemini-2.5-pro'
 ) -> None:
     """
     Usa um LLM para gerar um cenário de simulação de projeto e o salva em um arquivo JSON.
@@ -56,13 +55,15 @@ def gerar_cenario_com_llm(
         Estrutura do JSON de saída esperado:
         {{
           "config": {{
-            "llm_model_a_ser_testado": "{llm_model}",
             "total_sprints_planejadas": {total_sprints},
             "tarefas_por_sprint": {tarefas_por_sprint}
           }},
           "projeto": {{
             "componentes": ["Componente A", "Componente B", "Componente C", "Componente D"],
-            "truck_factors": {{"Componente A": 2, "Componente B": 2, "Componente C": 3, "Componente D": 1}},
+            "truck_factors": {{
+              "Componente A": {{"value": 2, "developers": ["NomeDev1", "NomeDev2"]}},
+              "Componente B": {{"value": 1, "developers": ["NomeDev3"]}}
+            }},
             "backlog_completo": {{
               "PROJ_TASK_001": {{"description": "Descrição detalhada da tarefa 1", "estimated_days": 3}},
               "PROJ_TASK_{total_tarefas:03d}": {{"description": "Descrição detalhada da tarefa {total_tarefas}", "estimated_days": 5}}
