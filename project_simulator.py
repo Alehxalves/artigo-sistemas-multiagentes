@@ -334,11 +334,13 @@ def run_simulation(scenario_path: str):
         description=(
             "Com base nos resultados completos da simulação: "
             f"{json.dumps(resultados_simulacao, indent=2)}, "
-            "gere uma análise final do projeto. A análise deve incluir: "
-            "1. Um resumo executivo do desempenho do projeto. "
-            "2. Uma seção 'analise_de_impacto_eventos' que detalha o impacto de cada evento. "
-            "3. Uma avaliação da resiliência da equipe e como as estimativas mudaram. "
-            "4. Recomendações para projetos futuros. "
+            "gere uma análise final do projeto. A análise deve ser um objeto JSON contendo uma única chave principal 'relatorio_final_projeto'. "
+            "Dentro deste objeto, inclua: "
+            "1. 'resumo_executivo': Um sumário do desempenho do projeto. "
+            "2. 'analise_quantitativa_final': Métricas de custo e prazo (planejado vs. realizado) e seus desvios. "
+            "3. 'analise_de_impacto_eventos': Uma lista detalhando o impacto de cada evento ocorrido. "
+            "4. 'avaliacao_resiliencia_equipe': Uma análise sobre como a equipe lidou com as mudanças. "
+            "5. 'recomendacoes': Recomendações para projetos futuros baseadas nos dados. "
             "Para a seção 'analise_de_impacto_eventos', use EXATAMENTE a seguinte estrutura para cada evento: "
             """
             {
@@ -358,7 +360,7 @@ def run_simulation(scenario_path: str):
             "Seja explícito na 'justificativa_custo' sobre como o custo e o prazo estão conectados, sem usar o termo 'dias-homem'."
         ),
         agent=summary_agent,
-        expected_output="Um único bloco de código JSON com a síntese final completa do projeto, seguindo as estruturas especificadas."
+        expected_output="Um único bloco de código JSON com a síntese final completa do projeto, aninhado sob a chave 'relatorio_final_projeto'."
     )
     summary_crew = Crew(agents=[summary_agent], tasks=[summary_task], process=Process.sequential, max_rpm=RPM_LIMIT)
     final_summary_raw = summary_crew.kickoff()
