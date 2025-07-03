@@ -373,7 +373,7 @@ def run_simulation(scenario_path: str):
         "sintese_final": final_summary
     }
 
-    output_filename = 'resultado_simulacao_completa.json'
+    output_filename = 'resultado_simulacao.json'
     with open(output_filename, 'w', encoding='utf-8') as f:
         json.dump(resultado_completo, f, ensure_ascii=False, indent=2)
 

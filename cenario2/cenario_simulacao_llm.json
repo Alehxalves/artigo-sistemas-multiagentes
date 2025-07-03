@@ -1,0 +1,224 @@
+{
+  "config": {
+    "total_sprints_planejadas": 5,
+    "tarefas_por_sprint": 5
+  },
+  "projeto": {
+    "nome": "Plataforma de Investimentos 'E-Invest'",
+    "componentes": [
+      "Autenticação e Segurança",
+      "Processamento de Pagamentos",
+      "Dashboard de Análise",
+      "API de Integração Externa"
+    ],
+    "truck_factors": {
+      "Autenticação e Segurança": {
+        "value": 2,
+        "developers": [
+          "Ana Silva",
+          "Carla Dias"
+        ]
+      },
+      "Processamento de Pagamentos": {
+        "value": 1,
+        "developers": [
+          "Carla Dias"
+        ]
+      },
+      "Dashboard de Análise": {
+        "value": 1,
+        "developers": [
+          "Bruno Costa"
+        ]
+      }
+    },
+    "backlog_completo": {
+      "EINV_001": {
+        "description": "Implementar fluxo de login com OAuth 2.0 e JWT",
+        "componente": "Autenticação e Segurança",
+        "estimated_days": 5
+      },
+      "EINV_002": {
+        "description": "Desenvolver tela de cadastro de novo usuário com validação de campos",
+        "componente": "Autenticação e Segurança",
+        "estimated_days": 3
+      },
+      "EINV_003": {
+        "description": "Criar endpoint para integração com gateway de pagamento (Stripe)",
+        "componente": "Processamento de Pagamentos",
+        "estimated_days": 8
+      },
+      "EINV_004": {
+        "description": "Modelagem do banco de dados para portfólio de investimentos do cliente",
+        "componente": "Dashboard de Análise",
+        "estimated_days": 4
+      },
+      "EINV_005": {
+        "description": "Desenvolver componente React para exibir gráfico de evolução de patrimônio",
+        "componente": "Dashboard de Análise",
+        "estimated_days": 5
+      },
+      "EINV_006": {
+        "description": "Configurar API para consulta de cotações de ações em tempo real (Alpha Vantage)",
+        "componente": "API de Integração Externa",
+        "estimated_days": 4
+      },
+      "EINV_007": {
+        "description": "Implementar funcionalidade de 'Esqueci minha senha' com envio de e-mail",
+        "componente": "Autenticação e Segurança",
+        "estimated_days": 3
+      },
+      "EINV_008": {
+        "description": "Criar microserviço para processar depósitos via PIX",
+        "componente": "Processamento de Pagamentos",
+        "estimated_days": 7
+      },
+      "EINV_009": {
+        "description": "Desenvolver tela de extrato de transações com filtros por data",
+        "componente": "Dashboard de Análise",
+        "estimated_days": 4
+      },
+      "EINV_010": {
+        "description": "Implementar testes de unidade para o serviço de autenticação",
+        "componente": "Autenticação e Segurança",
+        "estimated_days": 3
+      },
+      "EINV_011": {
+        "description": "Refatorar CSS da aplicação para utilizar Styled Components",
+        "componente": "Dashboard de Análise",
+        "estimated_days": 5
+      },
+      "EINV_012": {
+        "description": "Criar endpoint para processamento de saques (TED/DOC)",
+        "componente": "Processamento de Pagamentos",
+        "estimated_days": 6
+      },
+      "EINV_013": {
+        "description": "Implementar autenticação de dois fatores (2FA) com Google Authenticator",
+        "componente": "Autenticação e Segurança",
+        "estimated_days": 6
+      },
+      "EINV_014": {
+        "description": "Desenvolver API para registrar ordens de compra e venda de ativos",
+        "componente": "API de Integração Externa",
+        "estimated_days": 5
+      },
+      "EINV_015": {
+        "description": "Criar tela para o usuário visualizar e gerenciar seu portfólio de ativos",
+        "componente": "Dashboard de Análise",
+        "estimated_days": 4
+      },
+      "EINV_016": {
+        "description": "Configurar logs centralizados e monitoramento de performance (ELK Stack)",
+        "componente": "Autenticação e Segurança",
+        "estimated_days": 5
+      },
+      "EINV_017": {
+        "description": "Implementar mecanismo de webhook para notificar status de pagamento",
+        "componente": "Processamento de Pagamentos",
+        "estimated_days": 4
+      },
+      "EINV_018": {
+        "description": "Desenvolver funcionalidade de 'Stop Loss' e 'Stop Gain' para ordens",
+        "componente": "API de Integração Externa",
+        "estimated_days": 6
+      },
+      "EINV_019": {
+        "description": "Otimizar consultas ao banco de dados na tela de extrato",
+        "componente": "Dashboard de Análise",
+        "estimated_days": 3
+      },
+      "EINV_020": {
+        "description": "Criar pipeline de CI/CD para o microserviço de pagamentos",
+        "componente": "Processamento de Pagamentos",
+        "estimated_days": 4
+      },
+      "EINV_021": {
+        "description": "Implementar testes de integração entre o serviço de autenticação e o de portfólio",
+        "componente": "Autenticação e Segurança",
+        "estimated_days": 5
+      },
+      "EINV_022": {
+        "description": "Desenvolver tela de perfil do usuário para edição de dados pessoais",
+        "componente": "Dashboard de Análise",
+        "estimated_days": 3
+      },
+      "EINV_023": {
+        "description": "Criar sistema de cache para dados de cotação de ações",
+        "componente": "API de Integração Externa",
+        "estimated_days": 4
+      },
+      "EINV_024": {
+        "description": "Realizar auditoria de segurança nas APIs expostas",
+        "componente": "Autenticação e Segurança",
+        "estimated_days": 7
+      },
+      "EINV_025": {
+        "description": "Documentar a API de pagamentos no Swagger/OpenAPI",
+        "componente": "Processamento de Pagamentos",
+        "estimated_days": 3
+      }
+    }
+  },
+  "equipe_inicial": {
+    "Ana Silva": {
+      "nivel": "Sênior",
+      "skills": "Java, Spring Boot, Microservices, Kafka, PostgreSQL, Liderança Técnica",
+      "preferences": "Arquitetura de sistemas distribuídos, mentoria de juniores, desafios de backend",
+      "cost_per_day": 650
+    },
+    "Bruno Costa": {
+      "nivel": "Pleno",
+      "skills": "React, TypeScript, Node.js, Java, REST APIs, CSS-in-JS",
+      "preferences": "Trabalhar em features de ponta a ponta (frontend e backend), novas tecnologias",
+      "cost_per_day": 500
+    },
+    "Carla Dias": {
+      "nivel": "Especialista",
+      "skills": "C#, .NET Core, Criptografia, PCI-DSS, APIs de Pagamento, Segurança da Informação",
+      "preferences": "Foco em segurança, tarefas críticas e de alta complexidade, conformidade regulatória",
+      "cost_per_day": 700
+    },
+    "Daniel Mendes": {
+      "nivel": "Júnior",
+      "skills": "HTML, CSS, JavaScript, React, Jest, Consumo de APIs",
+      "preferences": "Aprender novas tecnologias, focado em UI/UX, trabalhar em par com desenvolvedores mais experientes",
+      "cost_per_day": 350
+    }
+  },
+  "plano_sprints": [
+    {
+      "sprint_id": 1,
+      "evento": null
+    },
+    {
+      "sprint_id": 2,
+      "evento": {
+        "tipo": "saida",
+        "dev": "Carla Dias",
+        "motivo": "Recebeu uma proposta para liderar uma equipe de segurança em outra fintech."
+      }
+    },
+    {
+      "sprint_id": 3,
+      "evento": null
+    },
+    {
+      "sprint_id": 4,
+      "evento": {
+        "tipo": "contratacao",
+        "dev": "Elisa Rocha",
+        "dev_details": {
+          "nivel": "Pleno",
+          "skills": "Java, Spring, Kotlin, Gateways de Pagamento, Docker, Testes Automatizados",
+          "preferences": "Resolução de problemas complexos de backend, automação de testes, sistemas de pagamento",
+          "cost_per_day": 550
+        }
+      }
+    },
+    {
+      "sprint_id": 5,
+      "evento": null
+    }
+  ]
+}

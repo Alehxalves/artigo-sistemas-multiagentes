@@ -1,0 +1,188 @@
+{
+  "config": {
+    "total_sprints_planejadas": 5,
+    "tarefas_por_sprint": 5
+  },
+  "projeto": {
+    "nome": "Plataforma E-commerce 'Orion'",
+    "componentes": [
+      "Autenticação e Autorização",
+      "Gestão de Inventário",
+      "Processamento de Pedidos",
+      "Relatórios e Análises"
+    ],
+    "truck_factors": {
+      "Autenticação e Autorização": {
+        "value": 2,
+        "developers": [
+          "Ana",
+          "Bruno"
+        ]
+      },
+      "Processamento de Pedidos": {
+        "value": 1,
+        "developers": [
+          "Carla"
+        ]
+      }
+    },
+    "backlog_completo": {
+      "PROJ_TASK_001": {
+        "description": "Implementar login com email e senha (Backend)",
+        "estimated_days": 3
+      },
+      "PROJ_TASK_002": {
+        "description": "Criar tela de login (Frontend)",
+        "estimated_days": 2
+      },
+      "PROJ_TASK_003": {
+        "description": "Configurar geração de token JWT na autenticação",
+        "estimated_days": 2
+      },
+      "PROJ_TASK_004": {
+        "description": "Criar endpoint para adicionar produto ao inventário",
+        "estimated_days": 3
+      },
+      "PROJ_TASK_005": {
+        "description": "Desenvolver interface de cadastro de produtos",
+        "estimated_days": 4
+      },
+      "PROJ_TASK_006": {
+        "description": "Implementar proteção de rotas baseada em roles (Admin, User)",
+        "estimated_days": 3
+      },
+      "PROJ_TASK_007": {
+        "description": "Modelagem do banco de dados para pedidos e itens de pedido",
+        "estimated_days": 2
+      },
+      "PROJ_TASK_008": {
+        "description": "Criar API para submissão de novos pedidos",
+        "estimated_days": 5
+      },
+      "PROJ_TASK_009": {
+        "description": "Implementar lógica de validação de estoque ao criar pedido",
+        "estimated_days": 3
+      },
+      "PROJ_TASK_010": {
+        "description": "Configurar pipeline de CI/CD para o serviço de autenticação",
+        "estimated_days": 4
+      },
+      "PROJ_TASK_011": {
+        "description": "Desenvolver tela de listagem de produtos com filtro",
+        "estimated_days": 3
+      },
+      "PROJ_TASK_012": {
+        "description": "Criar endpoint para atualizar quantidade de um produto em estoque",
+        "estimated_days": 2
+      },
+      "PROJ_TASK_013": {
+        "description": "Implementar fluxo de 'Esqueci minha senha' com envio de email",
+        "estimated_days": 4
+      },
+      "PROJ_TASK_014": {
+        "description": "Desenvolver a página 'Meus Pedidos' para o usuário",
+        "estimated_days": 3
+      },
+      "PROJ_TASK_015": {
+        "description": "Criar um consumidor Kafka para processar pagamentos de forma assíncrona",
+        "estimated_days": 5
+      },
+      "PROJ_TASK_016": {
+        "description": "Dockerizar o serviço de Gestão de Inventário",
+        "estimated_days": 2
+      },
+      "PROJ_TASK_017": {
+        "description": "Gerar relatório de vendas mensal em PDF",
+        "estimated_days": 6
+      },
+      "PROJ_TASK_018": {
+        "description": "Implementar testes de integração para o fluxo de criação de pedido",
+        "estimated_days": 4
+      },
+      "PROJ_TASK_019": {
+        "description": "Refatorar componente de autenticação para suportar OAuth2 (Google Login)",
+        "estimated_days": 5
+      },
+      "PROJ_TASK_020": {
+        "description": "Criar dashboard de admin com métricas de vendas",
+        "estimated_days": 5
+      },
+      "PROJ_TASK_021": {
+        "description": "Otimizar queries de consulta de produtos no banco de dados",
+        "estimated_days": 3
+      },
+      "PROJ_TASK_022": {
+        "description": "Configurar monitoramento e alertas para o serviço de Pedidos (Prometheus/Grafana)",
+        "estimated_days": 4
+      },
+      "PROJ_TASK_023": {
+        "description": "Implementar endpoint para cancelamento de pedidos",
+        "estimated_days": 3
+      },
+      "PROJ_TASK_024": {
+        "description": "Criar a tela de detalhes de um produto",
+        "estimated_days": 2
+      },
+      "PROJ_TASK_025": {
+        "description": "Migração do banco de dados para uma nova versão do PostgreSQL com zero downtime",
+        "estimated_days": 8
+      }
+    }
+  },
+  "equipe_inicial": {
+    "Ana": {
+      "skills": "Java, Spring Boot, OAuth2, JWT, Testes de Unidade",
+      "preferences": "Backend, Segurança, Arquitetura de Microserviços",
+      "cost_per_day": 500
+    },
+    "Bruno": {
+      "skills": "React, TypeScript, Redux, CSS-in-JS, Testes de Componentes",
+      "preferences": "Frontend, UI/UX, Acessibilidade",
+      "cost_per_day": 480
+    },
+    "Carla": {
+      "skills": "Java, Kafka, PostgreSQL, SQL, Flyway, Lógica de Negócio Complexa",
+      "preferences": "Backend, Processamento Assíncrono, Banco de Dados",
+      "cost_per_day": 520
+    },
+    "Daniel": {
+      "skills": "AWS (EC2, S3, RDS), Docker, Kubernetes, Jenkins, Terraform",
+      "preferences": "DevOps, Infraestrutura como Código, CI/CD",
+      "cost_per_day": 550
+    }
+  },
+  "plano_sprints": [
+    {
+      "sprint_id": 1,
+      "evento": null
+    },
+    {
+      "sprint_id": 2,
+      "evento": {
+        "tipo": "saida",
+        "dev": "Carla",
+        "motivo": "Recebeu uma oferta irrecusável de outra empresa, impactando o componente 'Processamento de Pedidos'."
+      }
+    },
+    {
+      "sprint_id": 3,
+      "evento": {
+        "tipo": "contratacao",
+        "dev": "Elisa",
+        "dev_details": {
+          "skills": "Java, Spring, RabbitMQ, Micronaut, Testes E2E",
+          "preferences": "Backend, Sistemas Distribuídos, Performance",
+          "cost_per_day": 530
+        }
+      }
+    },
+    {
+      "sprint_id": 4,
+      "evento": null
+    },
+    {
+      "sprint_id": 5,
+      "evento": null
+    }
+  ]
+}
