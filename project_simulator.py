@@ -1,5 +1,3 @@
-# project_simulator.py
-
 import json
 import os
 import time
@@ -10,9 +8,9 @@ from crewai import Agent, Task, Crew, Process, LLM
 load_dotenv()
 API_KEY = os.getenv("OPENAI_API_KEY") or os.getenv("GOOGLE_API_KEY")
 
-# --- Constante para o limite de RPM ---
+# Constante para o limite de RPM
 RPM_LIMIT = 14
-# --- Modelos LLM padrões para a simulação ---
+# Modelos LLM padrões para a simulação
 LLM_MODEL_DEFAULT = 'gemini/gemini-2.0-flash-lite'
 LLM_MODEL_SIMULATION = 'gemini/gemini-2.5-pro'
 
@@ -60,7 +58,6 @@ def _sanitize_json_output(raw_output: str) -> str:
     json_content = clean_output[json_start_index:json_end_index + 1]
 
     # Verifica se é uma lista de objetos que não está entre colchetes
-    # Ex: { ... }, { ... }
     if json_content.startswith('{') and json_content.endswith('}') and '},{' in json_content:
         return f'[{json_content}]'
 
@@ -208,7 +205,7 @@ def run_simulation(scenario_path: str):
                         f"O truck factor do projeto é: {json.dumps(truck_factors)}. "
                         f"O backlog restante tem {len(remaining_backlog)} tarefas, somando {total_dias_restantes} dias estimados. "
                         f"Analise o impacto quantitativo desta saída no projeto. Considere se o dev era um 'truck factor' para algum componente. "
-                        f"Estime a variação de custo e de prazo para o restante do projeto. "
+                        f"Estime a variação de custo e de prazo (em dias de atraso) para o restante do projeto. "
                         f"Uma variação positiva indica um aumento (impacto negativo), enquanto uma variação negativa indica uma redução (impacto positivo)."
                     )
 
@@ -218,7 +215,7 @@ def run_simulation(scenario_path: str):
                 equipe_atual[novo_dev] = evento['dev_details']
                 print(f"[EVENTO] Contratação: {novo_dev} se juntou à equipe.")
 
-                # --- Estimar o período de adaptação com LLM ---
+                # Estimar o período de adaptação com LLM
                 print("Estimando período de adaptação do novo desenvolvedor...")
                 ramp_up_task_desc = (
                     f"O novo desenvolvedor é '{novo_dev}' com as seguintes competências: {json.dumps(evento['dev_details'])}. "
@@ -246,7 +243,7 @@ def run_simulation(scenario_path: str):
                     print(
                         f"Erro ao decodificar JSON da estimativa de adaptação. Usando valor padrão de {periodo_adaptacao_dias} dias.")
                 custo_adaptacao = periodo_adaptacao_dias * evento['dev_details']['cost_per_day']
-                # --- Fim da estimativa de adaptação ---
+                # Fim da estimativa de adaptação
 
                 impact_analysis_desc = (
                     f"O desenvolvedor '{novo_dev}' ({json.dumps(evento['dev_details'])}) foi contratado. "
@@ -255,7 +252,7 @@ def run_simulation(scenario_path: str):
                     f"O truck factor do projeto é: {json.dumps(truck_factors)}. "
                     f"O backlog restante tem {len(remaining_backlog)} tarefas, somando {total_dias_restantes} dias estimados. "
                     f"Analise o impacto quantitativo desta contratação no projeto, considerando o período de adaptação. "
-                    f"Estime a variação de custo e de prazo para o restante do projeto. "
+                    f"Estime a variação de custo e de prazo (em dias de atraso) para o restante do projeto. "
                     f"Uma variação negativa indica uma redução (impacto positivo), enquanto uma variação positiva indica um aumento (impacto negativo)."
                 )
 
@@ -339,12 +336,29 @@ def run_simulation(scenario_path: str):
             f"{json.dumps(resultados_simulacao, indent=2)}, "
             "gere uma análise final do projeto. A análise deve incluir: "
             "1. Um resumo executivo do desempenho do projeto. "
-            "2. O impacto dos eventos (saídas e contratações) nos custos e prazos totais, usando as análises de impacto quantitativas geradas. "
+            "2. Uma seção 'analise_de_impacto_eventos' que detalha o impacto de cada evento. "
             "3. Uma avaliação da resiliência da equipe e como as estimativas mudaram. "
-            "4. Recomendações para projetos futuros."
+            "4. Recomendações para projetos futuros. "
+            "Para a seção 'analise_de_impacto_eventos', use EXATAMENTE a seguinte estrutura para cada evento: "
+            """
+            {
+              "sprint_id": <ID da Sprint do evento>,
+              "evento": "<Nome do evento, ex: Saída da Desenvolvedora 'Carla'>",
+              "descricao": "<Descrição do evento e seu contexto>",
+              "impacto_quantitativo": {
+                "custo_adicional_estimado": <valor numérico do custo extra gerado pelo evento>,
+                "impacto_prazo_dias": <valor numérico do impacto em dias no cronograma>,
+                "justificativa_custo": "<Explicação sobre a origem do custo adicional e como ele se relaciona com o impacto em dias no prazo. Por exemplo, 'O custo adicional é resultado do esforço extra necessário para cobrir as responsabilidades, o que gerou X dias de atraso.'>",
+                "impacto_no_cronograma": "<Explicação sobre como o cronograma foi afetado>"
+              },
+              "impacto_qualitativo": "<Análise qualitativa do impacto do evento no projeto, equipe e riscos>"
+            }
+            """
+            "Use os dados de 'analise_impacto_evento' de cada sprint para preencher esta seção. "
+            "Seja explícito na 'justificativa_custo' sobre como o custo e o prazo estão conectados, sem usar o termo 'dias-homem'."
         ),
         agent=summary_agent,
-        expected_output="JSON com a síntese final do projeto."
+        expected_output="Um único bloco de código JSON com a síntese final completa do projeto, seguindo as estruturas especificadas."
     )
     summary_crew = Crew(agents=[summary_agent], tasks=[summary_task], process=Process.sequential, max_rpm=RPM_LIMIT)
     final_summary_raw = summary_crew.kickoff()
