@@ -385,6 +385,6 @@ def run_simulation(scenario_path: str):
 if __name__ == '__main__':
     if not os.path.exists('cenario_simulacao_llm.json'):
         print("Erro: Arquivo 'cenario_simulacao_llm.json' não encontrado.")
-        print("Execute 'gerador_cenario_llm.py' primeiro para criar o cenário.")
+        print("Execute 'gerador_cenario.py' primeiro para criar o cenário.")
     else:
         run_simulation('cenario_simulacao_llm.json')
