@@ -1,0 +1,547 @@
+{
+  "cenario_usado": {
+    "config": {
+      "total_sprints_planejadas": 5,
+      "tarefas_por_sprint": 5
+    },
+    "projeto": {
+      "nome": "Plataforma de Investimentos 'E-Invest'",
+      "componentes": [
+        "Autenticação e Segurança",
+        "Processamento de Pagamentos",
+        "Dashboard de Análise",
+        "API de Integração Externa"
+      ],
+      "truck_factors": {
+        "Autenticação e Segurança": {
+          "value": 2,
+          "developers": [
+            "Ana Silva",
+            "Carla Dias"
+          ]
+        },
+        "Processamento de Pagamentos": {
+          "value": 1,
+          "developers": [
+            "Carla Dias"
+          ]
+        },
+        "Dashboard de Análise": {
+          "value": 1,
+          "developers": [
+            "Bruno Costa"
+          ]
+        }
+      },
+      "backlog_completo": {
+        "EINV_001": {
+          "description": "Implementar fluxo de login com OAuth 2.0 e JWT",
+          "componente": "Autenticação e Segurança",
+          "estimated_days": 5
+        },
+        "EINV_002": {
+          "description": "Desenvolver tela de cadastro de novo usuário com validação de campos",
+          "componente": "Autenticação e Segurança",
+          "estimated_days": 3
+        },
+        "EINV_003": {
+          "description": "Criar endpoint para integração com gateway de pagamento (Stripe)",
+          "componente": "Processamento de Pagamentos",
+          "estimated_days": 8
+        },
+        "EINV_004": {
+          "description": "Modelagem do banco de dados para portfólio de investimentos do cliente",
+          "componente": "Dashboard de Análise",
+          "estimated_days": 4
+        },
+        "EINV_005": {
+          "description": "Desenvolver componente React para exibir gráfico de evolução de patrimônio",
+          "componente": "Dashboard de Análise",
+          "estimated_days": 5
+        },
+        "EINV_006": {
+          "description": "Configurar API para consulta de cotações de ações em tempo real (Alpha Vantage)",
+          "componente": "API de Integração Externa",
+          "estimated_days": 4
+        },
+        "EINV_007": {
+          "description": "Implementar funcionalidade de 'Esqueci minha senha' com envio de e-mail",
+          "componente": "Autenticação e Segurança",
+          "estimated_days": 3
+        },
+        "EINV_008": {
+          "description": "Criar microserviço para processar depósitos via PIX",
+          "componente": "Processamento de Pagamentos",
+          "estimated_days": 7
+        },
+        "EINV_009": {
+          "description": "Desenvolver tela de extrato de transações com filtros por data",
+          "componente": "Dashboard de Análise",
+          "estimated_days": 4
+        },
+        "EINV_010": {
+          "description": "Implementar testes de unidade para o serviço de autenticação",
+          "componente": "Autenticação e Segurança",
+          "estimated_days": 3
+        },
+        "EINV_011": {
+          "description": "Refatorar CSS da aplicação para utilizar Styled Components",
+          "componente": "Dashboard de Análise",
+          "estimated_days": 5
+        },
+        "EINV_012": {
+          "description": "Criar endpoint para processamento de saques (TED/DOC)",
+          "componente": "Processamento de Pagamentos",
+          "estimated_days": 6
+        },
+        "EINV_013": {
+          "description": "Implementar autenticação de dois fatores (2FA) com Google Authenticator",
+          "componente": "Autenticação e Segurança",
+          "estimated_days": 6
+        },
+        "EINV_014": {
+          "description": "Desenvolver API para registrar ordens de compra e venda de ativos",
+          "componente": "API de Integração Externa",
+          "estimated_days": 5
+        },
+        "EINV_015": {
+          "description": "Criar tela para o usuário visualizar e gerenciar seu portfólio de ativos",
+          "componente": "Dashboard de Análise",
+          "estimated_days": 4
+        },
+        "EINV_016": {
+          "description": "Configurar logs centralizados e monitoramento de performance (ELK Stack)",
+          "componente": "Autenticação e Segurança",
+          "estimated_days": 5
+        },
+        "EINV_017": {
+          "description": "Implementar mecanismo de webhook para notificar status de pagamento",
+          "componente": "Processamento de Pagamentos",
+          "estimated_days": 4
+        },
+        "EINV_018": {
+          "description": "Desenvolver funcionalidade de 'Stop Loss' e 'Stop Gain' para ordens",
+          "componente": "API de Integração Externa",
+          "estimated_days": 6
+        },
+        "EINV_019": {
+          "description": "Otimizar consultas ao banco de dados na tela de extrato",
+          "componente": "Dashboard de Análise",
+          "estimated_days": 3
+        },
+        "EINV_020": {
+          "description": "Criar pipeline de CI/CD para o microserviço de pagamentos",
+          "componente": "Processamento de Pagamentos",
+          "estimated_days": 4
+        },
+        "EINV_021": {
+          "description": "Implementar testes de integração entre o serviço de autenticação e o de portfólio",
+          "componente": "Autenticação e Segurança",
+          "estimated_days": 5
+        },
+        "EINV_022": {
+          "description": "Desenvolver tela de perfil do usuário para edição de dados pessoais",
+          "componente": "Dashboard de Análise",
+          "estimated_days": 3
+        },
+        "EINV_023": {
+          "description": "Criar sistema de cache para dados de cotação de ações",
+          "componente": "API de Integração Externa",
+          "estimated_days": 4
+        },
+        "EINV_024": {
+          "description": "Realizar auditoria de segurança nas APIs expostas",
+          "componente": "Autenticação e Segurança",
+          "estimated_days": 7
+        },
+        "EINV_025": {
+          "description": "Documentar a API de pagamentos no Swagger/OpenAPI",
+          "componente": "Processamento de Pagamentos",
+          "estimated_days": 3
+        }
+      }
+    },
+    "equipe_inicial": {
+      "Ana Silva": {
+        "nivel": "Sênior",
+        "skills": "Java, Spring Boot, Microservices, Kafka, PostgreSQL, Liderança Técnica",
+        "preferences": "Arquitetura de sistemas distribuídos, mentoria de juniores, desafios de backend",
+        "cost_per_day": 650
+      },
+      "Bruno Costa": {
+        "nivel": "Pleno",
+        "skills": "React, TypeScript, Node.js, Java, REST APIs, CSS-in-JS",
+        "preferences": "Trabalhar em features de ponta a ponta (frontend e backend), novas tecnologias",
+        "cost_per_day": 500
+      },
+      "Carla Dias": {
+        "nivel": "Especialista",
+        "skills": "C#, .NET Core, Criptografia, PCI-DSS, APIs de Pagamento, Segurança da Informação",
+        "preferences": "Foco em segurança, tarefas críticas e de alta complexidade, conformidade regulatória",
+        "cost_per_day": 700
+      },
+      "Daniel Mendes": {
+        "nivel": "Júnior",
+        "skills": "HTML, CSS, JavaScript, React, Jest, Consumo de APIs",
+        "preferences": "Aprender novas tecnologias, focado em UI/UX, trabalhar em par com desenvolvedores mais experientes",
+        "cost_per_day": 350
+      }
+    },
+    "plano_sprints": [
+      {
+        "sprint_id": 1,
+        "evento": null
+      },
+      {
+        "sprint_id": 2,
+        "evento": {
+          "tipo": "saida",
+          "dev": "Carla Dias",
+          "motivo": "Recebeu uma proposta para liderar uma equipe de segurança em outra fintech."
+        }
+      },
+      {
+        "sprint_id": 3,
+        "evento": null
+      },
+      {
+        "sprint_id": 4,
+        "evento": {
+          "tipo": "contratacao",
+          "dev": "Elisa Rocha",
+          "dev_details": {
+            "nivel": "Pleno",
+            "skills": "Java, Spring, Kotlin, Gateways de Pagamento, Docker, Testes Automatizados",
+            "preferences": "Resolução de problemas complexos de backend, automação de testes, sistemas de pagamento",
+            "cost_per_day": 550
+          }
+        }
+      },
+      {
+        "sprint_id": 5,
+        "evento": null
+      }
+    ]
+  },
+  "plano_de_sprints_gerado": {
+    "1": [
+      "EINV_001",
+      "EINV_002",
+      "EINV_004",
+      "EINV_006",
+      "EINV_007",
+      "EINV_010"
+    ],
+    "2": [
+      "EINV_003",
+      "EINV_005",
+      "EINV_009",
+      "EINV_014"
+    ],
+    "3": [
+      "EINV_008",
+      "EINV_012",
+      "EINV_013",
+      "EINV_015"
+    ],
+    "4": [
+      "EINV_016",
+      "EINV_017",
+      "EINV_018",
+      "EINV_019",
+      "EINV_022",
+      "EINV_023"
+    ],
+    "5": [
+      "EINV_011",
+      "EINV_020",
+      "EINV_021",
+      "EINV_024",
+      "EINV_025"
+    ]
+  },
+  "resultados_por_sprint": [
+    {
+      "sprint_id": 1,
+      "evento": null,
+      "analise_impacto_evento": null,
+      "alocacao": [
+        {
+          "task_id": "EINV_001",
+          "assignee": "Carla Dias",
+          "estimated_days": 4,
+          "estimated_cost": 2800
+        },
+        {
+          "task_id": "EINV_002",
+          "assignee": "Bruno Costa",
+          "estimated_days": 3,
+          "estimated_cost": 1500
+        },
+        {
+          "task_id": "EINV_004",
+          "assignee": "Ana Silva",
+          "estimated_days": 3,
+          "estimated_cost": 1950
+        },
+        {
+          "task_id": "EINV_006",
+          "assignee": "Bruno Costa",
+          "estimated_days": 4,
+          "estimated_cost": 2000
+        },
+        {
+          "task_id": "EINV_007",
+          "assignee": "Ana Silva",
+          "estimated_days": 2,
+          "estimated_cost": 1300
+        },
+        {
+          "task_id": "EINV_010",
+          "assignee": "Daniel Mendes",
+          "estimated_days": 4,
+          "estimated_cost": 1400
+        }
+      ],
+      "total_sprint_days": 20,
+      "total_sprint_cost": 10950
+    },
+    {
+      "sprint_id": 2,
+      "evento": {
+        "tipo": "saida",
+        "dev": "Carla Dias",
+        "motivo": "Recebeu uma proposta para liderar uma equipe de segurança em outra fintech."
+      },
+      "analise_impacto_evento": {
+        "impacto_custo_estimado": 9400.0,
+        "impacto_prazo_estimado_dias": 13,
+        "risco_truck_factor_afetado": true,
+        "analise_qualitativa": "A saída de Carla Dias impacta o projeto de forma crítica. O risco de 'truck factor' foi materializado, pois ela era a única desenvolvedora com conhecimento no componente 'Processamento de Pagamentos' (truck factor = 1). Isso cria um gargalo imediato, exigindo que outro membro da equipe seja treinado, o que incorre em tempo e custo adicionais. A análise quantitativa estima um atraso de 13 dias no cronograma, resultante da combinação da redução da capacidade da equipe (de 4 para 3 desenvolvedores) e do tempo de aprendizado necessário para cobrir a lacuna de conhecimento (estimado em um esforço adicional de 15.7 dias-homem). Este esforço adicional gera um custo extra de R$ 9.400,00 (considerando um custo diário de R$ 600/desenvolvedor). Adicionalmente, o componente 'Autenticação e Segurança' agora possui um truck factor de 1, aumentando o risco geral do projeto."
+      },
+      "alocacao": [
+        {
+          "task_id": "EINV_003",
+          "assignee": "Ana Silva",
+          "estimated_days": 6,
+          "estimated_cost": 3900,
+          "justification": "Alocada para a Sênior Ana Silva devido à criticidade da integração com pagamento e à ausência da especialista do componente (Carla Dias). A estimativa foi reduzida de 8 para 6 dias devido à sua senioridade e expertise em backend, mitigando o risco."
+        },
+        {
+          "task_id": "EINV_005",
+          "assignee": "Bruno Costa",
+          "estimated_days": 5,
+          "estimated_cost": 2500,
+          "justification": "Alocada para Bruno Costa por ser o desenvolvedor-chave ('truck factor') do componente 'Dashboard de Análise' e possuir as skills exatas (React). A estimativa original de 5 dias foi mantida por ser adequada ao seu nível Pleno."
+        },
+        {
+          "task_id": "EINV_009",
+          "assignee": "Daniel Mendes",
+          "estimated_days": 6,
+          "estimated_cost": 2100,
+          "justification": "Alocada para o Júnior Daniel Mendes por ser uma tarefa de UI/UX alinhada com suas skills (React, Consumo de APIs) e preferências. A estimativa foi ajustada de 4 para 6 dias para refletir sua curva de aprendizado e nível de experiência."
+        },
+        {
+          "task_id": "EINV_014",
+          "assignee": "Bruno Costa",
+          "estimated_days": 5,
+          "estimated_cost": 2500,
+          "justification": "Alocada para Bruno Costa por sua competência em Java e REST APIs, sendo o mais indicado para esta tarefa de backend após a alocação da tarefa principal para a Ana. A estimativa de 5 dias é apropriada para seu nível Pleno."
+        }
+      ],
+      "total_sprint_days": 22,
+      "total_sprint_cost": 11000
+    },
+    {
+      "sprint_id": 3,
+      "evento": null,
+      "analise_impacto_evento": null,
+      "alocacao": [
+        {
+          "task_id": "EINV_008",
+          "assignee": "Ana Silva",
+          "estimated_days": 7,
+          "estimated_cost": 4550
+        },
+        {
+          "task_id": "EINV_012",
+          "assignee": "Bruno Costa",
+          "estimated_days": 6,
+          "estimated_cost": 3000
+        },
+        {
+          "task_id": "EINV_013",
+          "assignee": "Ana Silva",
+          "estimated_days": 5,
+          "estimated_cost": 3250
+        },
+        {
+          "task_id": "EINV_015",
+          "assignee": "Daniel Mendes",
+          "estimated_days": 6,
+          "estimated_cost": 2100
+        }
+      ],
+      "total_sprint_days": 24,
+      "total_sprint_cost": 12900
+    },
+    {
+      "sprint_id": 4,
+      "evento": {
+        "tipo": "contratacao",
+        "dev": "Elisa Rocha",
+        "dev_details": {
+          "nivel": "Pleno",
+          "skills": "Java, Spring, Kotlin, Gateways de Pagamento, Docker, Testes Automatizados",
+          "preferences": "Resolução de problemas complexos de backend, automação de testes, sistemas de pagamento",
+          "cost_per_day": 550
+        }
+      },
+      "analise_impacto_evento": {
+        "impacto_custo_estimado": 2750.0,
+        "impacto_prazo_estimado_dias": -3,
+        "risco_truck_factor_afetado": true,
+        "analise_qualitativa": "A contratação de Elisa Rocha representa um investimento estratégico com um trade-off claro e positivo. O custo adicional de R$ 2.750,00, referente ao período de integração não produtivo, é compensado por uma aceleração estimada de 3 dias no cronograma do projeto. O impacto mais significativo, no entanto, é na mitigação de riscos. A equipe possuía uma vulnerabilidade crítica (Truck Factor = 1) na área de 'Processamento de Pagamentos', que dependia de um único desenvolvedor que não faz mais parte da equipe. As habilidades de Elisa em 'Gateways de Pagamento' preenchem essa lacuna diretamente, aumentando a resiliência do projeto. A contratação, portanto, não apenas otimiza o prazo de entrega, mas fortalece a equipe contra falhas críticas, justificando o investimento."
+      },
+      "alocacao": [
+        {
+          "task_id": "EINV_016",
+          "assignee": "Ana Silva",
+          "estimated_days": 4,
+          "estimated_cost": 2600
+        },
+        {
+          "task_id": "EINV_017",
+          "assignee": "Elisa Rocha",
+          "estimated_days": 4,
+          "estimated_cost": 2200
+        },
+        {
+          "task_id": "EINV_018",
+          "assignee": "Bruno Costa",
+          "estimated_days": 7,
+          "estimated_cost": 3500
+        },
+        {
+          "task_id": "EINV_019",
+          "assignee": "Ana Silva",
+          "estimated_days": 2,
+          "estimated_cost": 1300
+        },
+        {
+          "task_id": "EINV_022",
+          "assignee": "Daniel Mendes",
+          "estimated_days": 4,
+          "estimated_cost": 1400
+        },
+        {
+          "task_id": "EINV_023",
+          "assignee": "Elisa Rocha",
+          "estimated_days": 4,
+          "estimated_cost": 2200
+        }
+      ],
+      "total_sprint_days": 25,
+      "total_sprint_cost": 13200
+    },
+    {
+      "sprint_id": 5,
+      "evento": null,
+      "analise_impacto_evento": null,
+      "alocacao": [
+        {
+          "task_id": "EINV_011",
+          "assignee": "Bruno Costa",
+          "estimated_days": 5,
+          "estimated_cost": 2500
+        },
+        {
+          "task_id": "EINV_020",
+          "assignee": "Elisa Rocha",
+          "estimated_days": 4,
+          "estimated_cost": 2200
+        },
+        {
+          "task_id": "EINV_021",
+          "assignee": "Ana Silva",
+          "estimated_days": 4,
+          "estimated_cost": 2600
+        },
+        {
+          "task_id": "EINV_024",
+          "assignee": "Ana Silva",
+          "estimated_days": 7,
+          "estimated_cost": 4550
+        },
+        {
+          "task_id": "EINV_025",
+          "assignee": "Daniel Mendes",
+          "estimated_days": 4,
+          "estimated_cost": 1400
+        }
+      ],
+      "total_sprint_days": 24,
+      "total_sprint_cost": 13250
+    }
+  ],
+  "sintese_final": {
+    "relatorio_final_projeto": {
+      "resumo_executivo": "O projeto foi concluído com um desvio de custo de 19,82% acima do planejado e um atraso de 8,70% no cronograma. O desempenho foi significativamente impactado por dois eventos principais: a saída não planejada de uma desenvolvedora sênior (Carla Dias), que materializou um risco de 'truck factor' e gerou um custo adicional de R$ 9.400 e um atraso de 13 dias; e a contratação estratégica de uma nova desenvolvedora (Elisa Rocha), que, apesar de um custo de integração de R$ 2.750, mitigou o risco anterior e acelerou o cronograma em 3 dias. A análise final indica que, embora a equipe tenha respondido de forma resiliente, a falta de um planejamento de contingência inicial para riscos de pessoal foi a principal causa dos desvios. A contratação posterior demonstrou ser uma decisão acertada, fortalecendo a equipe e reduzindo o impacto negativo inicial.",
+      "analise_quantitativa_final": {
+        "custo_planejado_total": 61300.0,
+        "custo_realizado_total": 73450.0,
+        "prazo_planejado_total_dias": 115,
+        "prazo_realizado_total_dias": 125,
+        "desvio_custo_total": 12150.0,
+        "desvio_prazo_total_dias": 10,
+        "desvio_custo_percentual": "19.82%",
+        "desvio_prazo_percentual": "8.70%",
+        "comentario_desvio": "O desvio de custo foi impulsionado principalmente pelo esforço adicional necessário para cobrir a saída de um membro-chave, parcialmente compensado pela eficiência ganha com a nova contratação. O desvio de prazo segue a mesma lógica, com o atraso inicial sendo atenuado, mas não totalmente eliminado, pela adição de um novo recurso à equipe."
+      },
+      "analise_de_impacto_eventos": [
+        {
+          "sprint_id": 2,
+          "evento": "Saída da Desenvolvedora 'Carla Dias'",
+          "descricao": "A desenvolvedora sênior Carla Dias, especialista no componente 'Processamento de Pagamentos', deixou o projeto ao aceitar uma oferta de outra empresa.",
+          "impacto_quantitativo": {
+            "custo_adicional_estimado": 9400.0,
+            "impacto_prazo_dias": 13,
+            "justificativa_custo": "O custo adicional de R$ 9.400,00 é resultado direto do esforço extra necessário para que outro membro da equipe absorvesse as responsabilidades de Carla, incluindo o tempo de aprendizado para cobrir a lacuna de conhecimento. Este esforço adicional gerou um atraso estimado de 13 dias no cronograma.",
+            "impacto_no_cronograma": "O cronograma foi estendido em 13 dias devido à perda de capacidade da equipe e à necessidade de treinamento para substituir o conhecimento especializado perdido, criando um gargalo temporário."
+          },
+          "impacto_qualitativo": "A saída de Carla Dias impactou o projeto de forma crítica. O risco de 'truck factor' foi materializado, pois ela era a única desenvolvedora com conhecimento no componente 'Processamento de Pagamentos'. Isso criou um gargalo imediato, exigindo que outro membro da equipe fosse treinado, o que incorreu em tempo e custo adicionais. Adicionalmente, o componente 'Autenticação e Segurança' passou a ter um truck factor de 1, aumentando o risco geral do projeto."
+        },
+        {
+          "sprint_id": 4,
+          "evento": "Contratação da Desenvolvedora 'Elisa Rocha'",
+          "descricao": "Contratação estratégica de uma desenvolvedora Pleno (Elisa Rocha) com skills em Java, Spring, e Gateways de Pagamento para mitigar o risco gerado pela saída anterior e fortalecer a equipe.",
+          "impacto_quantitativo": {
+            "custo_adicional_estimado": 2750.0,
+            "impacto_prazo_dias": -3,
+            "justificativa_custo": "O custo adicional de R$ 2.750,00 refere-se ao período de integração e onboarding da nova desenvolvedora. Embora represente um custo imediato, este investimento permitiu uma aceleração no cronograma, resultando em uma redução de 3 dias no prazo final.",
+            "impacto_no_cronograma": "O cronograma foi reduzido em 3 dias. A adição de um novo membro com as competências certas aumentou a capacidade produtiva da equipe, permitindo a conclusão de tarefas de forma mais rápida e a mitigação de gargalos."
+          },
+          "impacto_qualitativo": "A contratação de Elisa Rocha representou um investimento estratégico com um trade-off positivo. O impacto mais significativo foi na mitigação de riscos, preenchendo a lacuna crítica de conhecimento em 'Processamento de Pagamentos' e aumentando a resiliência do projeto. A contratação não apenas otimizou o prazo de entrega, mas fortaleceu a equipe contra falhas críticas, justificando o investimento."
+        }
+      ],
+      "avaliacao_resiliencia_equipe": "A equipe demonstrou uma resiliência reativa e proativa. Inicialmente, a saída de Carla expôs uma vulnerabilidade crítica (truck factor = 1), forçando uma realocação de tarefas que, embora necessária, impactou o cronograma. A resposta proativa, com a contratação de Elisa Rocha, foi crucial. Essa decisão não apenas resolveu o gargalo de conhecimento, mas também aumentou a capacidade geral da equipe, permitindo a recuperação de parte do atraso. A equipe adaptou-se à crise e, com apoio gerencial, fortaleceu sua estrutura, terminando o projeto mais robusta do que começou.",
+      "recomendacoes": [
+        {
+          "recomendacao": "Monitoramento Contínuo do Truck Factor",
+          "descricao": "Implementar um processo formal e contínuo para mapear o conhecimento crítico e o 'truck factor' da equipe. Realizar sessões de compartilhamento de conhecimento (knowledge sharing), pair programming e manter documentação técnica atualizada para evitar a criação de novos pontos únicos de falha.",
+          "justificativa_baseada_em_dados": "A saída de Carla Dias (Sprint 2) materializou um risco de truck factor = 1, causando um atraso de 13 dias e um custo extra de R$ 9.400. Um monitoramento proativo teria identificado e mitigado este risco antes de seu impacto."
+        },
+        {
+          "recomendacao": "Alocação de Reserva de Contingência",
+          "descricao": "Incluir no planejamento de todos os projetos uma reserva de contingência de custo e prazo (ex: 10-15%) especificamente para cobrir eventos não planejados, como saídas de pessoal ou problemas técnicos inesperados.",
+          "justificativa_baseada_em_dados": "O projeto incorreu em um custo não planejado de R$ 12.150 devido a eventos. Uma reserva de contingência teria absorvido esse impacto, mantendo o projeto dentro de um orçamento ajustado e fornecendo uma visão mais realista das finanças desde o início."
+        },
+        {
+          "recomendacao": "Análise de Risco em Contratações",
+          "descricao": "Ao contratar novos membros, avaliar os candidatos não apenas por suas habilidades técnicas para as tarefas atuais, mas também por sua capacidade de mitigar riscos existentes no projeto, como lacunas de conhecimento ou baixo 'truck factor' em áreas críticas.",
+          "justificativa_baseada_em_dados": "A contratação de Elisa Rocha (Sprint 4), embora com um custo de R$ 2.750, reduziu o prazo em 3 dias e, mais importante, eliminou um risco crítico. Isso prova que o investimento em pessoal pode ter um ROI positivo tanto em prazo quanto em resiliência."
+        }
+      ]
+    }
+  }
+}

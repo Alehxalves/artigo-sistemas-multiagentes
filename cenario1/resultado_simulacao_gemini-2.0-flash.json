@@ -1,0 +1,514 @@
+{
+  "cenario_usado": {
+    "config": {
+      "total_sprints_planejadas": 5,
+      "tarefas_por_sprint": 5
+    },
+    "projeto": {
+      "nome": "Plataforma E-commerce 'Orion'",
+      "componentes": [
+        "Autenticação e Autorização",
+        "Gestão de Inventário",
+        "Processamento de Pedidos",
+        "Relatórios e Análises"
+      ],
+      "truck_factors": {
+        "Autenticação e Autorização": {
+          "value": 2,
+          "developers": [
+            "Ana",
+            "Bruno"
+          ]
+        },
+        "Processamento de Pedidos": {
+          "value": 1,
+          "developers": [
+            "Carla"
+          ]
+        }
+      },
+      "backlog_completo": {
+        "PROJ_TASK_001": {
+          "description": "Implementar login com email e senha (Backend)",
+          "estimated_days": 3
+        },
+        "PROJ_TASK_002": {
+          "description": "Criar tela de login (Frontend)",
+          "estimated_days": 2
+        },
+        "PROJ_TASK_003": {
+          "description": "Configurar geração de token JWT na autenticação",
+          "estimated_days": 2
+        },
+        "PROJ_TASK_004": {
+          "description": "Criar endpoint para adicionar produto ao inventário",
+          "estimated_days": 3
+        },
+        "PROJ_TASK_005": {
+          "description": "Desenvolver interface de cadastro de produtos",
+          "estimated_days": 4
+        },
+        "PROJ_TASK_006": {
+          "description": "Implementar proteção de rotas baseada em roles (Admin, User)",
+          "estimated_days": 3
+        },
+        "PROJ_TASK_007": {
+          "description": "Modelagem do banco de dados para pedidos e itens de pedido",
+          "estimated_days": 2
+        },
+        "PROJ_TASK_008": {
+          "description": "Criar API para submissão de novos pedidos",
+          "estimated_days": 5
+        },
+        "PROJ_TASK_009": {
+          "description": "Implementar lógica de validação de estoque ao criar pedido",
+          "estimated_days": 3
+        },
+        "PROJ_TASK_010": {
+          "description": "Configurar pipeline de CI/CD para o serviço de autenticação",
+          "estimated_days": 4
+        },
+        "PROJ_TASK_011": {
+          "description": "Desenvolver tela de listagem de produtos com filtro",
+          "estimated_days": 3
+        },
+        "PROJ_TASK_012": {
+          "description": "Criar endpoint para atualizar quantidade de um produto em estoque",
+          "estimated_days": 2
+        },
+        "PROJ_TASK_013": {
+          "description": "Implementar fluxo de 'Esqueci minha senha' com envio de email",
+          "estimated_days": 4
+        },
+        "PROJ_TASK_014": {
+          "description": "Desenvolver a página 'Meus Pedidos' para o usuário",
+          "estimated_days": 3
+        },
+        "PROJ_TASK_015": {
+          "description": "Criar um consumidor Kafka para processar pagamentos de forma assíncrona",
+          "estimated_days": 5
+        },
+        "PROJ_TASK_016": {
+          "description": "Dockerizar o serviço de Gestão de Inventário",
+          "estimated_days": 2
+        },
+        "PROJ_TASK_017": {
+          "description": "Gerar relatório de vendas mensal em PDF",
+          "estimated_days": 6
+        },
+        "PROJ_TASK_018": {
+          "description": "Implementar testes de integração para o fluxo de criação de pedido",
+          "estimated_days": 4
+        },
+        "PROJ_TASK_019": {
+          "description": "Refatorar componente de autenticação para suportar OAuth2 (Google Login)",
+          "estimated_days": 5
+        },
+        "PROJ_TASK_020": {
+          "description": "Criar dashboard de admin com métricas de vendas",
+          "estimated_days": 5
+        },
+        "PROJ_TASK_021": {
+          "description": "Otimizar queries de consulta de produtos no banco de dados",
+          "estimated_days": 3
+        },
+        "PROJ_TASK_022": {
+          "description": "Configurar monitoramento e alertas para o serviço de Pedidos (Prometheus/Grafana)",
+          "estimated_days": 4
+        },
+        "PROJ_TASK_023": {
+          "description": "Implementar endpoint para cancelamento de pedidos",
+          "estimated_days": 3
+        },
+        "PROJ_TASK_024": {
+          "description": "Criar a tela de detalhes de um produto",
+          "estimated_days": 2
+        },
+        "PROJ_TASK_025": {
+          "description": "Migração do banco de dados para uma nova versão do PostgreSQL com zero downtime",
+          "estimated_days": 8
+        }
+      }
+    },
+    "equipe_inicial": {
+      "Ana": {
+        "skills": "Java, Spring Boot, OAuth2, JWT, Testes de Unidade",
+        "preferences": "Backend, Segurança, Arquitetura de Microserviços",
+        "cost_per_day": 500
+      },
+      "Bruno": {
+        "skills": "React, TypeScript, Redux, CSS-in-JS, Testes de Componentes",
+        "preferences": "Frontend, UI/UX, Acessibilidade",
+        "cost_per_day": 480
+      },
+      "Carla": {
+        "skills": "Java, Kafka, PostgreSQL, SQL, Flyway, Lógica de Negócio Complexa",
+        "preferences": "Backend, Processamento Assíncrono, Banco de Dados",
+        "cost_per_day": 520
+      },
+      "Daniel": {
+        "skills": "AWS (EC2, S3, RDS), Docker, Kubernetes, Jenkins, Terraform",
+        "preferences": "DevOps, Infraestrutura como Código, CI/CD",
+        "cost_per_day": 550
+      }
+    },
+    "plano_sprints": [
+      {
+        "sprint_id": 1,
+        "evento": null
+      },
+      {
+        "sprint_id": 2,
+        "evento": {
+          "tipo": "saida",
+          "dev": "Carla",
+          "motivo": "Recebeu uma oferta irrecusável de outra empresa, impactando o componente 'Processamento de Pedidos'."
+        }
+      },
+      {
+        "sprint_id": 3,
+        "evento": {
+          "tipo": "contratacao",
+          "dev": "Elisa",
+          "dev_details": {
+            "skills": "Java, Spring, RabbitMQ, Micronaut, Testes E2E",
+            "preferences": "Backend, Sistemas Distribuídos, Performance",
+            "cost_per_day": 530
+          }
+        }
+      },
+      {
+        "sprint_id": 4,
+        "evento": null
+      },
+      {
+        "sprint_id": 5,
+        "evento": null
+      }
+    ]
+  },
+  "plano_de_sprints_gerado": {
+    "1": [
+      "PROJ_TASK_001",
+      "PROJ_TASK_002",
+      "PROJ_TASK_003",
+      "PROJ_TASK_010"
+    ],
+    "2": [
+      "PROJ_TASK_004",
+      "PROJ_TASK_005",
+      "PROJ_TASK_006",
+      "PROJ_TASK_016"
+    ],
+    "3": [
+      "PROJ_TASK_007",
+      "PROJ_TASK_008",
+      "PROJ_TASK_009",
+      "PROJ_TASK_011"
+    ],
+    "4": [
+      "PROJ_TASK_012",
+      "PROJ_TASK_013",
+      "PROJ_TASK_014",
+      "PROJ_TASK_018",
+      "PROJ_TASK_024"
+    ],
+    "5": [
+      "PROJ_TASK_015",
+      "PROJ_TASK_017",
+      "PROJ_TASK_019",
+      "PROJ_TASK_020",
+      "PROJ_TASK_021",
+      "PROJ_TASK_022",
+      "PROJ_TASK_023",
+      "PROJ_TASK_025"
+    ]
+  },
+  "resultados_por_sprint": [
+    {
+      "sprint_id": 1,
+      "evento": null,
+      "analise_impacto_evento": null,
+      "alocacao": [
+        {
+          "task_id": "PROJ_TASK_001",
+          "assignee": "Ana",
+          "estimated_days": 3,
+          "estimated_cost": 1500
+        },
+        {
+          "task_id": "PROJ_TASK_002",
+          "assignee": "Bruno",
+          "estimated_days": 2,
+          "estimated_cost": 960
+        },
+        {
+          "task_id": "PROJ_TASK_003",
+          "assignee": "Ana",
+          "estimated_days": 2,
+          "estimated_cost": 1000
+        },
+        {
+          "task_id": "PROJ_TASK_010",
+          "assignee": "Daniel",
+          "estimated_days": 4,
+          "estimated_cost": 2200
+        }
+      ],
+      "total_sprint_days": 11,
+      "total_sprint_cost": 5660
+    },
+    {
+      "sprint_id": 2,
+      "evento": {
+        "tipo": "saida",
+        "dev": "Carla",
+        "motivo": "Recebeu uma oferta irrecusável de outra empresa, impactando o componente 'Processamento de Pedidos'."
+      },
+      "analise_impacto_evento": {
+        "impacto_custo_estimado": 18960.0,
+        "impacto_prazo_estimado_dias": 15,
+        "risco_truck_factor_afetado": true,
+        "analise_qualitativa": "A saída da desenvolvedora 'Carla' impacta o projeto de duas formas principais. Primeiro, há uma redução imediata de 25% na capacidade produtiva da equipe (de 4 para 3 membros), o que, por si só, já estenderia o prazo. Segundo, e mais crítico, a análise do truck factor revela que 'Carla' era a única detentora do conhecimento sobre o componente 'Processamento de Pedidos'. A materialização deste risco cria um gargalo técnico significativo. A estimativa de atraso de 15 dias é calculada da seguinte forma: o prazo original com 4 devs era de ~20 dias (79 dias-homem / 4). O novo prazo considera não apenas a equipe reduzida, mas também um acréscimo de esforço (overhead de 75% sobre uma porção estimada de 40% do backlog) para a transferência de conhecimento e a curva de aprendizado no componente crítico, resultando em um novo total de ~35 dias. O custo adicional de R$ 18.960,00 representa o valor monetário deste esforço extra (aproximadamente 23.7 dias-homem adicionais, com um custo diário estimado de R$ 800,00/dev), necessário para que a equipe remanescente absorva as responsabilidades e mitigue os riscos associados ao componente que ficou sem especialista."
+      },
+      "alocacao": [
+        {
+          "task_id": "PROJ_TASK_004",
+          "assignee": "Ana",
+          "estimated_days": 3,
+          "estimated_cost": 1500
+        },
+        {
+          "task_id": "PROJ_TASK_005",
+          "assignee": "Bruno",
+          "estimated_days": 4,
+          "estimated_cost": 1920
+        },
+        {
+          "task_id": "PROJ_TASK_006",
+          "assignee": "Ana",
+          "estimated_days": 3,
+          "estimated_cost": 1500
+        },
+        {
+          "task_id": "PROJ_TASK_016",
+          "assignee": "Daniel",
+          "estimated_days": 2,
+          "estimated_cost": 1100
+        }
+      ],
+      "total_sprint_days": 12,
+      "total_sprint_cost": 6020
+    },
+    {
+      "sprint_id": 3,
+      "evento": {
+        "tipo": "contratacao",
+        "dev": "Elisa",
+        "dev_details": {
+          "skills": "Java, Spring, RabbitMQ, Micronaut, Testes E2E",
+          "preferences": "Backend, Sistemas Distribuídos, Performance",
+          "cost_per_day": 530
+        }
+      },
+      "analise_impacto_evento": {
+        "impacto_custo_estimado": 2650.0,
+        "impacto_prazo_estimado_dias": -4,
+        "risco_truck_factor_afetado": true,
+        "analise_qualitativa": "A contratação de 'Elisa' representa um investimento estratégico com impacto predominantemente positivo. Financeiramente, há um custo adicional direto de R$ 2.650,00, referente ao período de adaptação de 5 dias da nova desenvolvedora, no qual ela não contribui para o avanço do backlog. Em contrapartida, o aumento da equipe de 3 para 4 desenvolvedores acelera a conclusão do trabalho restante, resultando em uma redução estimada de 4 dias no cronograma do projeto. O benefício mais significativo, no entanto, é a mitigação de um risco crítico: a saída de 'Carla' deixou o módulo 'Processamento de Pedidos' sem nenhum especialista (truck factor 0). A contratação de Elisa, com suas competências alinhadas, preenche essa lacuna vital, restaurando a capacidade técnica da equipe e melhorando a resiliência do projeto."
+      },
+      "alocacao": [
+        {
+          "task_id": "PROJ_TASK_007",
+          "assignee": "Ana",
+          "estimated_days": 2,
+          "estimated_cost": 1000
+        },
+        {
+          "task_id": "PROJ_TASK_008",
+          "assignee": "Elisa",
+          "estimated_days": 5,
+          "estimated_cost": 2650
+        },
+        {
+          "task_id": "PROJ_TASK_009",
+          "assignee": "Elisa",
+          "estimated_days": 3,
+          "estimated_cost": 1590
+        },
+        {
+          "task_id": "PROJ_TASK_011",
+          "assignee": "Bruno",
+          "estimated_days": 3,
+          "estimated_cost": 1440
+        }
+      ],
+      "total_sprint_days": 13,
+      "total_sprint_cost": 6680
+    },
+    {
+      "sprint_id": 4,
+      "evento": null,
+      "analise_impacto_evento": null,
+      "alocacao": [
+        {
+          "task_id": "PROJ_TASK_012",
+          "assignee": "Ana",
+          "estimated_days": 2,
+          "estimated_cost": 1000
+        },
+        {
+          "task_id": "PROJ_TASK_013",
+          "assignee": "Ana",
+          "estimated_days": 4.5,
+          "estimated_cost": 2250
+        },
+        {
+          "task_id": "PROJ_TASK_014",
+          "assignee": "Bruno",
+          "estimated_days": 3,
+          "estimated_cost": 1440
+        },
+        {
+          "task_id": "PROJ_TASK_018",
+          "assignee": "Elisa",
+          "estimated_days": 4,
+          "estimated_cost": 2120
+        },
+        {
+          "task_id": "PROJ_TASK_024",
+          "assignee": "Bruno",
+          "estimated_days": 2,
+          "estimated_cost": 960
+        }
+      ],
+      "total_sprint_days": 15.5,
+      "total_sprint_cost": 7770
+    },
+    {
+      "sprint_id": 5,
+      "evento": null,
+      "analise_impacto_evento": null,
+      "alocacao": [
+        {
+          "task_id": "PROJ_TASK_015",
+          "assignee": "Elisa",
+          "estimated_days": 4,
+          "estimated_cost": 2120
+        },
+        {
+          "task_id": "PROJ_TASK_017",
+          "assignee": "Elisa",
+          "estimated_days": 6,
+          "estimated_cost": 3180
+        },
+        {
+          "task_id": "PROJ_TASK_019",
+          "assignee": "Ana",
+          "estimated_days": 4,
+          "estimated_cost": 2000
+        },
+        {
+          "task_id": "PROJ_TASK_020",
+          "assignee": "Bruno",
+          "estimated_days": 5,
+          "estimated_cost": 2400
+        },
+        {
+          "task_id": "PROJ_TASK_021",
+          "assignee": "Elisa",
+          "estimated_days": 3,
+          "estimated_cost": 1590
+        },
+        {
+          "task_id": "PROJ_TASK_022",
+          "assignee": "Daniel",
+          "estimated_days": 4,
+          "estimated_cost": 2200
+        },
+        {
+          "task_id": "PROJ_TASK_023",
+          "assignee": "Elisa",
+          "estimated_days": 3,
+          "estimated_cost": 1590
+        },
+        {
+          "task_id": "PROJ_TASK_025",
+          "assignee": "Daniel",
+          "estimated_days": 8,
+          "estimated_cost": 4400
+        }
+      ],
+      "total_sprint_days": 37,
+      "total_sprint_cost": 19480
+    }
+  ],
+  "sintese_final": {
+    "relatorio_final_projeto": {
+      "resumo_executivo": "O projeto foi concluído com um desvio significativo de custo (+47,38%) e um atraso moderado no cronograma (+12,43%) em relação ao planejamento inicial. O principal fator para esses desvios foi um evento não planejado na Sprint 2: a saída de uma desenvolvedora chave ('Carla'), que expôs um risco crítico de 'truck factor' (conhecimento centralizado em um único indivíduo). A resposta a este evento, através de uma contratação estratégica na Sprint 3 ('Elisa'), foi eficaz para mitigar o risco e recuperar parte do atraso, mas gerou custos adicionais significativos. A análise final demonstra que, embora o projeto tenha sido entregue, o custo da baixa resiliência inicial da equipe foi alto, ressaltando a importância crítica da gestão de conhecimento e do planejamento de contingência de pessoal.",
+      "analise_quantitativa_final": {
+        "custo": {
+          "planejado_total": 45610.0,
+          "realizado_total": 67220.0,
+          "desvio_absoluto": 21610.0,
+          "desvio_percentual": 47.38
+        },
+        "prazo": {
+          "planejado_total_dias": 88.5,
+          "realizado_total_dias": 99.5,
+          "desvio_absoluto_dias": 11.0,
+          "desvio_percentual": 12.43
+        }
+      },
+      "analise_de_impacto_eventos": [
+        {
+          "sprint_id": 2,
+          "evento": "Saída da Desenvolvedora 'Carla'",
+          "descricao": "Recebeu uma oferta irrecusável de outra empresa, impactando o componente 'Processamento de Pedidos'.",
+          "impacto_quantitativo": {
+            "custo_adicional_estimado": 18960.0,
+            "impacto_prazo_dias": 15,
+            "justificativa_custo": "O custo adicional de R$ 18.960,00 é o valor monetário do esforço extra necessário para a equipe remanescente absorver as responsabilidades e mitigar os riscos no componente crítico. Este esforço adicional resultou diretamente em um atraso de 15 dias no cronograma.",
+            "impacto_no_cronograma": "O cronograma foi estendido em 15 dias devido à redução da capacidade da equipe e, principalmente, ao tempo necessário para a transferência de conhecimento e curva de aprendizado no componente que ficou sem especialista."
+          },
+          "impacto_qualitativo": "A saída da desenvolvedora 'Carla' impactou o projeto de duas formas principais. Primeiro, houve uma redução imediata de 25% na capacidade produtiva da equipe. Segundo, e mais crítico, a análise do truck factor revelou que 'Carla' era a única detentora do conhecimento sobre o componente 'Processamento de Pedidos'. A materialização deste risco criou um gargalo técnico significativo."
+        },
+        {
+          "sprint_id": 3,
+          "evento": "Contratação da Desenvolvedora 'Elisa'",
+          "descricao": "Contratação de uma nova desenvolvedora com as competências 'Java, Spring, RabbitMQ, Micronaut, Testes E2E' para mitigar o impacto da saída anterior.",
+          "impacto_quantitativo": {
+            "custo_adicional_estimado": 2650.0,
+            "impacto_prazo_dias": -4,
+            "justificativa_custo": "O custo adicional de R$ 2.650,00 refere-se ao período de adaptação da nova desenvolvedora, durante o qual ela não contribuiu para o avanço do backlog. Este investimento, no entanto, permitiu acelerar o trabalho restante, gerando uma economia de 4 dias no prazo final.",
+            "impacto_no_cronograma": "O cronograma foi reduzido em 4 dias. Embora tenha havido um período inicial de adaptação, o aumento da capacidade da equipe de 3 para 4 membros mais do que compensou esse tempo, acelerando a entrega do projeto."
+          },
+          "impacto_qualitativo": "A contratação de 'Elisa' foi um investimento estratégico com impacto positivo. O benefício mais significativo foi a mitigação do risco crítico de truck factor no módulo 'Processamento de Pedidos', preenchendo a lacuna de conhecimento deixada pela saída de 'Carla' e restaurando a resiliência técnica da equipe."
+        }
+      ],
+      "avaliacao_resiliencia_equipe": "A resiliência da equipe foi testada severamente. Inicialmente, a equipe demonstrou baixa resiliência devido a um 'truck factor' de 1 em um componente crítico, o que resultou em um impacto desproporcional em custo e prazo após a saída de um membro. A resposta da gestão, com uma contratação rápida e direcionada, permitiu que a equipe se recuperasse, demonstrando uma resiliência reativa. A equipe conseguiu absorver a nova integrante e mitigar o gargalo de conhecimento, mas o custo dessa recuperação (R$ 21.610 e 11 dias de atraso líquido) evidencia uma falha na resiliência proativa, que deveria ter sido garantida por meio de práticas de compartilhamento de conhecimento contínuas.",
+      "recomendacoes": [
+        {
+          "recomendacao": "Implementar Gestão de Conhecimento Ativa",
+          "justificativa_baseada_em_dados": "O custo de R$ 18.960,00 para mitigar um único ponto de falha (truck factor) justifica o investimento preventivo em práticas como pair programming, code reviews sistemáticos e documentação viva para evitar a centralização de conhecimento.",
+          "acao_sugerida": "Instituir uma política onde nenhuma funcionalidade crítica pode ser mantida por um único desenvolvedor. Alocar tempo nas sprints para sessões de compartilhamento de conhecimento."
+        },
+        {
+          "recomendacao": "Alocar Reserva de Contingência para Riscos de Pessoal",
+          "justificativa_baseada_em_dados": "O projeto sofreu um desvio de custo de 47,38% devido a um evento de pessoal. Isso demonstra que o risco de rotatividade é material e deve ser provisionado financeiramente.",
+          "acao_sugerida": "Incluir uma reserva de contingência de 10-15% no orçamento de projetos futuros, especificamente para cobrir custos imprevistos de contratação, onboarding e perda de produtividade associados à rotatividade da equipe."
+        },
+        {
+          "recomendacao": "Otimizar o Processo de Onboarding",
+          "justificativa_baseada_em_dados": "O custo de R$ 2.650,00 para 5 dias de adaptação de 'Elisa' representa um custo direto de integração. Acelerar essa curva de aprendizado pode gerar economias diretas e antecipar os benefícios de produtividade.",
+          "acao_sugerida": "Desenvolver um kit de onboarding para novos desenvolvedores, com acesso a documentação, ambiente de desenvolvimento pré-configurado e um 'buddy' designado para acelerar a integração."
+        },
+        {
+          "recomendacao": "Realizar Análise de Custo-Benefício para Ações Corretivas",
+          "justificativa_baseada_em_dados": "A contratação de 'Elisa', apesar de um custo de R$ 2.650,00, resultou em uma economia de 4 dias no cronograma. Esta análise positiva valida a decisão e deve ser um modelo para futuras ações.",
+          "acao_sugerida": "Ao enfrentar desvios, modelar quantitativamente o impacto em custo e prazo de diferentes ações corretivas (ex: contratar, terceirizar, reduzir escopo) para tomar decisões baseadas em dados."
+        }
+      ]
+    }
+  }
+}
